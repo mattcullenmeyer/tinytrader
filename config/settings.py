@@ -20,6 +20,7 @@ DEBUG = os.getenv('DEBUG', False)
 ALLOWED_HOSTS = [
   'tinytrader.io',
   'www.tinytrader.io',
+  '167.71.183.49',
   '127.0.0.1'
 ]
 
