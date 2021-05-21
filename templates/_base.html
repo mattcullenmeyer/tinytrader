@@ -1,0 +1,83 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}Tiny Trader{% endblock title %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="icon" type="image/svg+xml" href="{% static 'images/chevron-double-right.svg' %}">
+  <!-- CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  {% block styles %}
+  {% endblock %}
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container container-fluid">
+        
+        <a class="navbar-brand px-2 py-1 fs-3" href="{% url 'pages:home' %}">
+          <i class="bi bi-chevron-double-right d-inline-block align-baseline text-primary"></i>
+          <span>tinytrader<span class="text-primary">.</span>io</span>
+        </a>
+        
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarToggler">
+          
+          <form class="d-flex ms-auto px-2 py-1">
+            <div class="input-group">
+              <span class="input-group-text">
+                <i class="bi-search"></i>
+              </span>
+              
+              <input class="form-control" type="search" placeholder="Search companies" aria-label="Search">
+            </div>
+          </form>
+          
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item px-2 py-1">
+              <a class="nav-link text-body" href="#">Blog</a>
+            </li>
+            <li class="nav-item px-2 py-1">
+              <a class="nav-link text-body" href="#">About</a>
+            </li>
+            {% if user.is_authenticated %}
+            <li class="nav-item px-2 py-1">
+                <a class="nav-link text-body" href="#">Log Out</a>
+            </li>
+            {% else %}
+            <li class="nav-item px-2 py-1">
+                <a class="nav-link text-body" href="#">Log In</a>
+            </li>
+            <li class="nav-item px-2 py-1">
+                <a class="btn btn-primary" href="#">Sign Up</a>
+            </li>
+            {% endif %}
+          </ul>
+          
+        </div>
+      </div>
+    </nav>
+
+
+  <div class="container">
+    {% block content %}
+    {% endblock content %}
+  </div>
+
+  <!-- JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+  <script src="{% static 'js/base.js' %}"></script>
+  {% block scripts %}
+  {% endblock %}
+
+</body>
+</html>
