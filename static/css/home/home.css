@@ -1,0 +1,16 @@
+body {
+  font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #333e48;
+}
+
+.h1-title {
+  font-size: 3.0rem;
+  font-weight: 300;
+  margin-top: 3rem;
+  text-align: center;
+  line-height: 135%;
+}
+
+.h1-strong {
+  font-weight: 600;
+}

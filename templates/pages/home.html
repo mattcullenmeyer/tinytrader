@@ -1,8 +1,24 @@
 {% extends '_base.html' %}
 {% load static %}
 
+{% block styles %}
+  <link rel="stylesheet" href="{% static 'css/home/home.css' %}">
+{% endblock %}
+
 {% block title %}TinyTrader | Quant Investing{% endblock title %}
 
 {% block content %}
-<h1>Homepage</h1>
+
+<div class="row">
+  <div class="col-4">
+    <h1 class="h1-title">
+      Quantitative Investing.
+      <span class="h1-strong">Simplified.</span>
+    </h1>
+  </div>
+  <div class="col-8">
+
+  </div>
+</div>
+
 {% endblock content %}
