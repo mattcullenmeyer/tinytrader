@@ -34,11 +34,8 @@
           
           <form class="d-flex ms-auto px-2 py-1">
             <div class="input-group">
-              <span class="input-group-text">
-                <i class="bi-search"></i>
-              </span>
-              
-              <input class="form-control" type="search" placeholder="Search companies" aria-label="Search">
+              <span class="input-group-text bg-transparent bi-search"></span>
+              <input id="nav-search" class="form-control" type="search" placeholder="Search companies" aria-label="Search">
             </div>
           </form>
           
@@ -67,11 +64,8 @@
       </div>
     </nav>
 
-
-  <div class="container">
-    {% block content %}
-    {% endblock content %}
-  </div>
+  {% block content %}
+  {% endblock content %}
 
   <!-- JavaScript -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
