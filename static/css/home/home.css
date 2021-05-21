@@ -6,11 +6,23 @@ body {
 .h1-title {
   font-size: 3.0rem;
   font-weight: 300;
-  margin-top: 3rem;
+  margin-top: 5rem;
   text-align: center;
   line-height: 135%;
 }
 
 .h1-strong {
   font-weight: 600;
+}
+
+.h1-title span {
+  display: block;
+}
+
+.h2-subtitle {
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-top: 2rem;
+  text-align: center;
+  line-height: 150%;
 }

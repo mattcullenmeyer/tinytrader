@@ -5,20 +5,26 @@
   <link rel="stylesheet" href="{% static 'css/home/home.css' %}">
 {% endblock %}
 
-{% block title %}TinyTrader | Quant Investing{% endblock title %}
+{% block title %}TinyTrader | Quantitatie Stock Analysis{% endblock title %}
 
 {% block content %}
 
-<div class="bg-transparent">
+<div class="bg-light">
   <div class="container">
-    <div class="row">
+    <div class="row" style="padding-bottom: 10rem;">
       <div class="col-sm-4">
+        
         <h1 class="h1-title">
-          Quantitative Investing.
+          <span>Quantitative</span>
+          <span>Stock Analysis.</span>
           <span class="h1-strong">Simplified.</span>
         </h1>
+
+        <h2 class="h2-subtitle">
+          Multi-factor stock selection for individual investors.
+        </h2>
     
-        <form class="px-2 py-5">
+        <form class="px-3 py-5">
           <div class="input-group input-group-lg">
             <span class="input-group-text bg-light bi-search"></span>
             <input id="body-search" class="form-control" type="search" placeholder="Search companies" aria-label="Search">
