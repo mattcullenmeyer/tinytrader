@@ -17,7 +17,7 @@ fetch('/api/v1/ticker/')
 			let ticker = ui.item.value.match(/\(([^)]+)\)/)[1];
 			//let url = generate_url(ticker);
 			//sessionStorage.setItem("ticker", ticker);
-			window.location.href = `/${ticker}`;
+			window.location.href = `/stock/${ticker}`;
 			$(this).val(''); 
 			return false;
 			// https://metaclass.co/django_url_reversing_in_js_code.html
