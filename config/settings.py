@@ -15,7 +15,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', False)
+# environment variables are read as strings (eg 'False'), 
+# therefore DEBUG must be converted to a boolean
+DEBUG = os.getenv('DEBUG', False) == 'True'
 
 ALLOWED_HOSTS = [
   'tinytrader.io',

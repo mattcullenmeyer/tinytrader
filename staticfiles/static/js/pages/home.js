@@ -5,7 +5,7 @@ fetch('/api/v1/ticker/')
 	for (let i in result) {
 		data.push(result[i].company_name_ticker.replace("''", "'"));
 	};
-	$("#nav-search").autocomplete({
+	$("#body-search").autocomplete({
 		source: function(req, resp) {
 			let res = $.ui.autocomplete.filter(data, req.term);
 			resp(res.slice(0, 10));
