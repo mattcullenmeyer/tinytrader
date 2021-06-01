@@ -36,10 +36,14 @@ INSTALLED_APPS = [
   'django.contrib.staticfiles',
 
   # Third-party
+  'rest_framework',
+  'rest_framework.authtoken', # http://www.tomchristie.com/rest-framework-2-docs/api-guide/authentication#tokenauthentication
+  'django_filters', # https://www.django-rest-framework.org/api-guide/filtering/#djangofilterbackend
 
   # Local
   'users',
   'pages',
+  'api',
 ]
 
 MIDDLEWARE = [
@@ -145,3 +149,18 @@ STATICFILES_FINDERS = [
 ]
 
 AUTH_USER_MODEL = 'users.User'
+
+# Ensure a tightly secured API by setting default permission class to allow only admins
+# https://simpleisbetterthancomplex.com/tutorial/2018/11/22/how-to-implement-token-authentication-using-django-rest-framework.html
+REST_FRAMEWORK = {
+  'DEFAULT_AUTHENTICATION_CLASSES': (
+    'rest_framework.authentication.TokenAuthentication',
+    'rest_framework.authentication.SessionAuthentication',
+  ),
+  'DEFAULT_PERMISSION_CLASSES': (
+    'rest_framework.permissions.IsAdminUser',
+  ),
+  'DEFAULT_FILTER_BACKENDS': (
+    'django_filters.rest_framework.DjangoFilterBackend',
+  ),
+}
