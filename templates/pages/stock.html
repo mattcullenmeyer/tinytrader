@@ -2,5 +2,13 @@
 {% load static %}
 
 {% block content %}
-<h1>Stock</h1>
+
+<div class="container">
+  <div id="root"></div>
+</div>
+
 {% endblock content %}
+
+{% block scripts %}
+  <script src="{% static 'js/index-bundle.js' %}"></script>
+{% endblock %}
