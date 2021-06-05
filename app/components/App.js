@@ -1,11 +1,18 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-
-const ticker = window.location.pathname.split('/')[2]
+import { useDispatch } from 'react-redux'
+import { update } from '../tickerSlice';
+import Header from './Header';
 
 const App = () => {
+  // get ticker symbol from url path
+  const ticker = window.location.pathname.split('/')[2]
+  const dispatch = useDispatch()
+  dispatch(update(ticker))
+  
   return (
-    <h1>{ticker}</h1>
+    <div>
+      <Header />
+    </div>
   );
 }
 

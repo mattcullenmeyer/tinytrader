@@ -1,0 +1,14 @@
+.company-name {
+  color: #414B56; 
+  font-family: Poppins, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-size: 2em;
+  font-style: normal;
+  font-weight: 600;
+  display: inline-block;
+  margin-top: 2rem;
+}
+
+.ticker-symbol {
+  font-weight: normal;
+}
