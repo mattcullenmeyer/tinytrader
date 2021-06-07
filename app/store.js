@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
-import tickerReducer from './tickerSlice';
-import metadataReducer from './metadataSlice';
+import tickerdataReducer from './reducers/tickerdataSlice';
+import metadataReducer from './reducers/metadataSlice';
 
 
 export default configureStore({
   reducer: {
-    ticker: tickerReducer,
+    tickerdata: tickerdataReducer,
     metadata: metadataReducer,
   }
 })

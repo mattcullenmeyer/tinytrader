@@ -1,31 +1,47 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchTicker } from '../tickerSlice';
-import { fetchMetadata } from '../metadataSlice';
+import { fetchTickerdata } from '../reducers/tickerdataSlice';
+import { fetchMetadata } from '../reducers/metadataSlice';
 import './Header.css';
-
 
 
 const Header = () => {
   
-  const dispatch = useDispatch()
-  const ticker = useSelector(state => state.ticker.data.ticker); //state.ticker.company_name_ticker);
-  //const company_name = useSelector(state => state.ticker.data.company_name);
+  const ticker = window.location.pathname.split('/')[2]
 
-  const company_name = useSelector(state => state.metadata.data.company_name);
+  const dispatch = useDispatch()
+
+  const tickerdata = useSelector(state => state.tickerdata.data); 
+  const tickerStatus = useSelector(state => state.tickerdata.status);
+
+  const metadata = useSelector(state => state.metadata.data);
+  const metaStatus = useSelector(state => state.metadata.status);
   
   useEffect(() => {
-    dispatch(fetchTicker());
-    dispatch(fetchMetadata());
-  }, []);
+    if (tickerStatus === 'idle') {
+      dispatch(fetchTickerdata(ticker));
+    }
+      
+    if (tickerStatus === 'success') {
+      dispatch(fetchMetadata(tickerdata.id));
+    }
+  }, [tickerStatus, dispatch]);
+
+  const header = () => {
+    if (metaStatus === 'success') {
+      return (
+        <h1 className="company-name">
+          <span>{metadata.company_name}</span>
+          <span className="ticker-symbol"> ({tickerdata.ticker})</span>
+        </h1>
+      );
+    }
+    return <h1></h1>;
+  }
 
   return (
     <div>
-      <h1 className="company-name">
-        <span>{company_name}</span>
-        <span className="ticker-symbol"> ({ticker})</span>
-      </h1>
-
+      {header()}
     </div>
   );
 }

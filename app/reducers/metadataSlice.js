@@ -1,15 +1,15 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import tinytrader from './apis/tinytrader';
-
+import tinytrader from '../apis/tinytrader';
 
 const initialState = {
+  status: 'idle',
   data: {},
 }
 
-export const fetchMetadata = createAsyncThunk('metadata/fetchMetadata', async () => {
-  const response = await tinytrader.get('/metadata/3412/');
-  console.log(response.data);
-  return response.data;
+export const fetchMetadata = createAsyncThunk(
+  'metadata/fetchMetadata', async (ticker_id) => {
+    const response = await tinytrader.get(`/metadata/${ticker_id}/`);
+    return response.data;
 })
 
 const metadataSlice = createSlice({
@@ -19,6 +19,7 @@ const metadataSlice = createSlice({
   extraReducers: {
     [fetchMetadata.fulfilled]: (state, action) => {
       state.data = action.payload;
+      state.status = 'success';
     }
   }
 })
