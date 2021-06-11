@@ -12,3 +12,13 @@
 .ticker-symbol {
   font-weight: normal;
 }
+
+.timestamp {
+  color: #414B56; 
+  font-family: Poppins, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-size: 0.9rem;
+  font-style: normal;
+  margin-top: 0.3rem;
+  margin-bottom: 1.5rem; 
+}

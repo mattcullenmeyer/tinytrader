@@ -27,16 +27,25 @@ const Header = () => {
     }
   }, [tickerStatus, dispatch]);
 
+  const formattedDate = () => {
+    const date = new Date(metadata.last_updated);
+    const date_formatted = date.toLocaleString('default', { month: 'short', day: 'numeric', year: 'numeric' });
+    return date_formatted;
+  }
+
   const header = () => {
     if (metaStatus === 'success') {
       return (
-        <h1 className="company-name">
-          <span>{metadata.company_name}</span>
-          <span className="ticker-symbol"> ({tickerdata.ticker})</span>
-        </h1>
+        <div>
+          <h1 className="company-name">
+            <span>{metadata.company_name}</span>
+            <span className="ticker-symbol"> ({tickerdata.ticker})</span>
+          </h1>
+          <div className="timestamp">Market close {formattedDate()}</div>
+        </div>
       );
     }
-    return <h1></h1>;
+    return;
   }
 
   return (
