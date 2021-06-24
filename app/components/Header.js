@@ -12,20 +12,10 @@ const Header = () => {
   const dispatch = useDispatch()
 
   const tickerdata = useSelector(state => state.tickerdata.data); 
-  const tickerStatus = useSelector(state => state.tickerdata.status);
 
   const metadata = useSelector(state => state.metadata.data);
   const metaStatus = useSelector(state => state.metadata.status);
   
-  useEffect(() => {
-    if (tickerStatus === 'idle') {
-      dispatch(fetchTickerdata(ticker));
-    }
-      
-    if (tickerStatus === 'success') {
-      dispatch(fetchMetadata(tickerdata.id));
-    }
-  }, [tickerStatus, dispatch]);
 
   const formattedDate = () => {
     const date = new Date(metadata.last_updated);

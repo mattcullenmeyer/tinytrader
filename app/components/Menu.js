@@ -14,7 +14,11 @@ const Menu = ({ menus, selectedMenu, onMenuSelect }) => {
     )
   })
   
-  return <div>{renderedMenuList}</div>;
+  return (
+    <div>
+      {renderedMenuList}
+    </div>
+  );
 }
 
 export default Menu;

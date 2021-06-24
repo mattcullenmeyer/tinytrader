@@ -1,0 +1,16 @@
+.menu-button {
+  float: left;
+  position: relative;
+  margin-right: 0.6rem;
+  border-radius: 32px;
+  background-color: white;
+  border: 1px solid #dadce0;
+  padding: 0.3rem 1rem;
+  color: #3C4043;
+}
+
+.active {
+  background-color: #E8F0FE;
+  color: #1967D2;
+  border-color: #D2E3FC;
+}

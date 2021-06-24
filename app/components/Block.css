@@ -1,0 +1,5 @@
+.block-container {
+  clear: both;
+  display: block;
+  position: relative;
+}
