@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+// Reducers
 import { fetchTickerdata } from '../reducers/tickerdataSlice';
 import { fetchMetadata } from '../reducers/metadataSlice';
 import { fetchMetricData } from '../reducers/metricSlice';
+// Components
 import Header from './Header';
 import Block from './Block';
 import Menu from './Menu';
-import Card from './Card';
-import RankCircle from './RankCircle';
+import Overview from './Overview'; 
+// Other
 import { menus } from './menuList';
-
 
 
 const App = () => {
@@ -35,6 +36,20 @@ const App = () => {
     }
   }, [tickerStatus, dispatch]);
 
+  const renderPage = () => {
+    switch(selectedMenu.name) {
+      case 'Overview':
+        return <Overview metadata={metadata} />;
+      case 'Valuation':
+        return <div>Valuation</div>;
+      case 'Momentum':
+        return <div>Momentum</div>;
+      case 'Quality':
+        return <div>Quality</div>;
+      default:
+        return <Overview metadata={metadata} />
+    }
+  }
 
   return (
     <div>
@@ -47,11 +62,9 @@ const App = () => {
           onMenuSelect={setSelectedMenu} 
         />
       </Block>
-
+      
       <Block>
-        <Card title="Overall" size="small" location="left">
-          <RankCircle rank={metadata.composite_rank} />
-        </Card>
+        {renderPage()}
       </Block>
       
       

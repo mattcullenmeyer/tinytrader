@@ -30,6 +30,9 @@ DATABASE_PASSWORD=<database password>
 
 ### Install Dependencies
 
+Install frontend packages with npm:  
+`$ npm install`  
+
 Create a virtual environment, activate and install dependencies:
 ```
 $ pip3 install virtualenv
@@ -45,3 +48,6 @@ With the virtual environment still active, run the following command to run the 
 `$ python manage.py runserver`
 
 Navigate to `http://127.0.0.1:8000/` to see the site.
+
+Create a super user to log into admin:   
+`$ python manage.py createsuper`
