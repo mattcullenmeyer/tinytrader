@@ -1,0 +1,9 @@
+.card-value {
+  font-size: 1.5em;
+  font-weight: 600;
+  font-family: Poppins, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-align: center;
+  margin-top: 0.3rem;
+  color: rgb(62,74,86);
+}

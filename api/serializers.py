@@ -35,6 +35,10 @@ class LiquiditySerializer(serializers.ModelSerializer):
     fields = '__all__'
 
 class MetadataSerializer(serializers.ModelSerializer):
+  sector = SectorSerializer(read_only=True)
+  industry = IndustrySerializer(read_only=True)
+  market_cap_size = SizeSerializer(read_only=True)
+  
   class Meta:
     model = models.Metadata
     fields = '__all__'

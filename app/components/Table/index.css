@@ -1,0 +1,36 @@
+.table-container {
+  position: relative;
+  margin-left: 1.2em;
+  margin-right: 1.2em;
+  margin-top: 11.5em;
+}
+
+.stats-table {
+  border-style: none;
+  color: rgb(62,74,86);
+  line-height: 1.55em;
+  font-family: Poppins, sans-serif;
+  vertical-align: middle;
+  font-weight: normal;
+}
+
+.left {
+  text-align: left;
+  width: 85%;
+  font-size: 0.95em;
+}
+
+.right {
+  text-align: center;
+  width: 15%;
+  font-size: 1.0em;
+}
+
+.top {
+  font-weight: 600;
+  border-top: none;
+}
+
+.main {
+  border-top: 2px solid rgb(248,250,252);
+}

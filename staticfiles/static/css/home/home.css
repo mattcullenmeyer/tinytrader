@@ -26,3 +26,7 @@ body {
   text-align: center;
   line-height: 150%;
 }
+
+.h2-subtitle span {
+  display: block;
+}

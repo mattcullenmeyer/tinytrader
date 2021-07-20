@@ -1,5 +1,5 @@
 import React from 'react';
-import './Card.css';
+import './index.css';
 
 
 const sizeConfig = {
@@ -26,7 +26,7 @@ const marginConfig = {
   }
 };
 
-const Card = ({ size, location, title, children }) => {
+const Card = ({ size, location, children }) => {
   const { height } = sizeConfig[size];
   const cardStyle = {
     height: height,
@@ -36,7 +36,6 @@ const Card = ({ size, location, title, children }) => {
     
   return (
 		<div className={`card ${marginClass}`} style={cardStyle}>
-      <h3 className="rank-type">{title}</h3>
       {children}
     </div>
 	)
