@@ -13,8 +13,8 @@
       <div class="card mb-4">
         <div class="card-body">
           <h2 class="card-title">{{ post.title }}</h2>
-          <p class="card-text text-muted h6">{{ post.author }} | {{ post.updated_on }} </p>
-          <p class="card-text">{{ post.content | markdown | safe | slice:":200" }}...</p>
+          <p class="card-text text-muted h6">{{ post.author.first_name }} {{ post.author.last_name }} | {{ post.updated_on }} </p>
+          <p class="card-text">{{ post.preview | markdown }}</p>
           <a href="{% url 'blog:post' post.slug  %}" class="btn btn-primary">Read More &rarr;</a>
         </div>
       </div>
