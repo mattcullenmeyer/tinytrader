@@ -1,0 +1,39 @@
+body {
+  font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #333e48;
+}
+
+.h1-title {
+  font-size: 3.0rem;
+  font-weight: 300;
+  margin-top: 6rem;
+  text-align: center;
+  line-height: 135%;
+}
+
+.h1-strong {
+  font-weight: 600;
+}
+
+.h1-title span {
+  display: block;
+}
+
+.h2-subtitle {
+  font-size: 1.6rem;
+  font-weight: 400;
+  margin-top: 2rem;
+  text-align: center;
+  line-height: 150%;
+}
+
+.h2-subtitle span {
+  display: block;
+}
+
+.app-image {
+  margin-top: 2rem;
+  width: 100%;
+  box-shadow: 0 16px 24px 2px rgb(29 17 51 / 4%), 0 6px 32px 4px rgb(9 32 77 / 12%), 0 8px 12px -5px rgb(29 17 51 / 12%);
+  border-radius: 0.2rem;
+}
