@@ -2,6 +2,10 @@
 {% load static %}
 {% load markdown_extras %}
 
+{% block styles %}
+  <link rel="stylesheet" href="{% static 'css/blog/blog.css' %}">
+{% endblock %}
+
 {% block title %}Blog{% endblock title %}
 
 {% block content %}

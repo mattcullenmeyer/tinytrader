@@ -1,0 +1,56 @@
+[vc_row content_width="grid" css=".home-custom-1{padding-bottom: 1% !important;background-color: rgb(240,248,255) !important;}"][vc_column][vc_column_text]
+
+
+<div class="filter-div">
+	<div><span><button type="button" class="filter-button" onclick="applyFilters()">Apply Filters</button></span><span class="filter-reset" onclick="resetFilters()">Reset filters</span></div>
+</div>
+
+<div class="select-container margin-right">
+	<div class="filter-header filter-margin">Size</div>
+	<div style="margin-left: 50px;"><select id="market-cap" class="select-filter" multiple="multiple"></select></div>
+</div>
+
+<div class="select-container margin-left">
+	<div class="filter-header filter-margin">Sector</div>
+	<div style="margin-left: 50px;"><select id="sector" class="select-filter" multiple="multiple"></select></div>
+</div>
+
+<div class="filter-container margin-right">
+	<div class="filter-header filter-margin">Overall</div>
+	<input class="filter-input filter-margin" type="number" id="overall_min" placeholder="0">
+	<div class="filter-to">to</div>
+	<input class="filter-input" type="number" id="overall_max" placeholder="100">
+</div>
+
+<div class="filter-container margin-right margin-left">
+	<div class="filter-header filter-margin">Value</div>
+	<input class="filter-input filter-margin" type="number" id="value_min" placeholder="0">
+	<div class="filter-to">to</div>
+	<input class="filter-input" type="number" id="value_max" placeholder="100">
+</div>
+
+<div class="filter-container margin-right margin-left">
+	<div class="filter-header filter-margin">Growth</div>
+	<input class="filter-input filter-margin" type="number" id="growth_min" placeholder="0">
+	<div class="filter-to">to</div>
+	<input class="filter-input" type="number" id="growth_max" placeholder="100">
+</div>
+
+<div class="filter-container margin-left">
+	<div class="filter-header filter-margin">Quality</div>
+	<input class="filter-input filter-margin" type="number" id="quality_min" placeholder="0">
+	<div class="filter-to">to</div>
+	<input class="filter-input" type="number" id="quality_max" placeholder="100">
+</div>
+
+&nbsp
+
+[/vc_column_text][/vc_column][/vc_row][vc_row content_width="grid" css=".home-custom-2{padding-top: 2% !important;padding-bottom: 1% !important;background-color: white !important;}"][vc_column][vc_column_text]
+
+<table id="stocks" class="row-border compact" width="100%"></table>
+
+&nbsp
+
+&nbsp
+
+[/vc_column_text][/vc_column][/vc_row]
