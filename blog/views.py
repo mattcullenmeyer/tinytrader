@@ -4,7 +4,7 @@ from django.shortcuts import render
 from .models import Post
 
 class BlogListView(ListView):
-  queryset = Post.objects.filter(status=1).order_by('-created_on')
+  queryset = Post.objects.filter(status=1).order_by('-updated_on')
   template_name = 'blog/blog_list.html'
 
 class BlogDetailView(DetailView):
