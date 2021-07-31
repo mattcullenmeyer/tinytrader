@@ -18,8 +18,10 @@ const Header = () => {
   
 
   const formattedDate = () => {
-    const date = new Date(metadata.last_updated);
-    const date_formatted = date.toLocaleString('default', { month: 'short', day: 'numeric', year: 'numeric' });
+    const date = new Date(`${metadata.last_updated}T00:00:00`);
+    const date_formatted = date.toLocaleString('en-US', 
+      { month: 'short', day: 'numeric', year: 'numeric' }
+    );
     return date_formatted;
   }
 
