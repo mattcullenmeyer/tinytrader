@@ -3,7 +3,7 @@ from users.models import User
 
 STATUS = (
   (0, "Draft"),
-  (1, "Publish")
+  (1, "Publish"),
 )
 
 class Post(models.Model):
@@ -28,4 +28,5 @@ class Image(models.Model):
   post = models.ForeignKey(Post, on_delete=models.CASCADE, blank=True, null=True)
 
   def __str__(self):
-    return f'{self.name} >> {self.post.title}'
+    #return f'{self.name} >> {self.post.title}'
+    return self.name
