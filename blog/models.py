@@ -9,7 +9,7 @@ STATUS = (
 class Post(models.Model):
   title = models.CharField(max_length=200, unique=True)
   slug = models.SlugField(max_length=200, unique=True)
-  author = models.ForeignKey(User, on_delete= models.CASCADE,related_name='blog_posts')
+  author = models.ForeignKey(User, on_delete= models.PROTECT,related_name='blog_posts')
   updated_on = models.DateField()
   preview = models.TextField()
   content = models.TextField()
@@ -25,6 +25,7 @@ class Post(models.Model):
 class Image(models.Model):
   name = models.CharField(max_length=200, unique=True)
   image = models.ImageField(upload_to='blog/')
+  post = models.ForeignKey(Post, on_delete=models.CASCADE, blank=True, null=True)
 
   def __str__(self):
-    return self.name
+    return f'{self.name} >> {self.post.title}'
