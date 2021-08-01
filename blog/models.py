@@ -25,8 +25,7 @@ class Post(models.Model):
 class Image(models.Model):
   name = models.CharField(max_length=200, unique=True)
   image = models.ImageField(upload_to='blog/')
-  post = models.ForeignKey(Post, on_delete=models.CASCADE, blank=True, null=True)
+  post = models.ForeignKey(Post, on_delete=models.CASCADE)
 
   def __str__(self):
-    #return f'{self.name} >> {self.post.title}'
-    return self.name
+    return f'{self.name} >> {self.post.title}'
