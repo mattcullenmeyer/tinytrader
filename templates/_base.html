@@ -84,18 +84,17 @@
   <footer class="py-4 mt-5 bg-light">
       <div class="container">
         <div class="row">
-          <div class="col-md-10">
-            <div class="denver-love">
-              Made with 
-              <span class="fa fa-heart"></span>
-              from Denver, CO.
-            </div>
+          <div class="col-md-8 py-1">
+            <a class="navbar-brand text-dark fs-5" href="{% url 'pages:home' %}">
+              <i class="bi bi-chevron-double-right d-inline-block align-baseline text-primary"></i>
+              <span>tinytrader<span class="text-primary" style="font-weight: 600">.</span>io</span>
+            </a>
           </div>
-          <div class="col-md-1">
-            <a class="text-decoration-none text-muted" href="{% url 'pages:privacy' %}">Privacy</a>
+          <div class="col-md-2 py-1">
+            <a class="text-decoration-none text-muted" href="{% url 'pages:privacy' %}">Privacy Policy</a>
           </div>
-          <div class="col-md-1">
-            <a class="text-decoration-none text-muted" href="{% url 'pages:terms' %}">Terms</a>
+          <div class="col-md-2 py-1">
+            <a class="text-decoration-none text-muted" href="{% url 'pages:terms' %}">Terms of Use</a>
           </div>
           <!-- <div class="col-md-3">
             <h6>Company</h6>
