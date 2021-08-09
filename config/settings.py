@@ -36,11 +36,15 @@ INSTALLED_APPS = [
   'django.contrib.sessions',
   'django.contrib.messages',
   'django.contrib.staticfiles',
+  'django.contrib.sites', # need this for allauth
 
   # Third-party
+  'crispy_forms',
   'rest_framework',
   'rest_framework.authtoken', # http://www.tomchristie.com/rest-framework-2-docs/api-guide/authentication#tokenauthentication
   'django_filters', # https://www.django-rest-framework.org/api-guide/filtering/#djangofilterbackend
+  'allauth', # https://django-allauth.readthedocs.io/en/latest/
+  'allauth.account',
 
   # Local
   'users',
@@ -158,6 +162,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 AUTH_USER_MODEL = 'users.User'
 
+# django-crispy-forms
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 # Ensure a tightly secured API by setting default permission class to allow only admins
 # https://simpleisbetterthancomplex.com/tutorial/2018/11/22/how-to-implement-token-authentication-using-django-rest-framework.html
 REST_FRAMEWORK = {
@@ -172,3 +179,20 @@ REST_FRAMEWORK = {
     'django_filters.rest_framework.DjangoFilterBackend',
   ),
 }
+
+# django-allauth config
+LOGIN_REDIRECT_URL = 'pages:home'
+ACCOUNT_LOGOUT_REDIRECT = 'pages:home' 
+SITE_ID = 1
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # use consol instead of smtp until server is configured
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+ACCOUNT_SESSION_REMEMBER = True # remember username and password of users
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False # only have to enter password once on signup
+ACCOUNT_USERNAME_REQUIRED = False 
+ACCOUNT_AUTHENTICATION_METHOD = 'email' 
+ACCOUNT_EMAIL_REQUIRED = True 
+ACCOUNT_UNIQUE_EMAIL = True 
