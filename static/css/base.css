@@ -40,3 +40,15 @@ p {
   color: #333e48;
   margin-top: 1.5rem;
 }
+
+.resend-verification-button {
+  margin-left: 1rem; 
+  border-color: #084298; 
+  color: #084298;
+}
+
+.resend-verification-button:hover {
+  background-color: white;
+  border-color: #084298; 
+  color: #084298;
+}

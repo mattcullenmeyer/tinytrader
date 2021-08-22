@@ -1,3 +1,38 @@
-from django.shortcuts import render
+from allauth.account.signals import email_confirmed
+from django.dispatch import receiver
+from allauth.account.models import EmailAddress
+from allauth.account.adapter import get_adapter
+from django.contrib import messages
+from django.shortcuts import redirect
 
-# Create your views here.
+
+# https://stackoverflow.com/questions/54467321/how-to-tell-if-users-email-address-has-been-verified-using-django-allauth-res
+# make email_verified = True in users model whenever allauth email confirmation is made
+@receiver(email_confirmed)
+def email_confirmed_(request, email_address, **kwargs):
+    user = email_address.user
+    user.email_verified = True
+
+    user.save()
+
+# https://stackoverflow.com/questions/66629248/allauth-resending-verification-redirects-to-another-page
+# override allauth resend verification post request to redirect to desired page (ie stay on current/previous page)
+def resend_verfication(request):
+  if request.method == "POST":
+    email = request.POST["email"]
+    next = request.POST["next"]
+    try:
+      email_address = EmailAddress.objects.get(
+        user=request.user,
+        email=email,
+      )
+      get_adapter(request).add_message(
+        request,
+        messages.INFO,
+        "account/messages/" "email_confirmation_sent.txt",
+        {"email": email},
+      )
+      email_address.send_confirmation(request)
+    except EmailAddress.DoesNotExist:
+        pass
+    return redirect(next)

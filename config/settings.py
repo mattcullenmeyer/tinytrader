@@ -188,11 +188,21 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 )
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # use consol instead of smtp until server is configured
-#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # use consol instead of smtp until server is configured
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 ACCOUNT_SESSION_REMEMBER = True # remember username and password of users
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False # only have to enter password once on signup
-ACCOUNT_USERNAME_REQUIRED = False 
+ACCOUNT_USERNAME_REQUIRED = True 
 ACCOUNT_AUTHENTICATION_METHOD = 'email' 
 ACCOUNT_EMAIL_REQUIRED = True 
 ACCOUNT_UNIQUE_EMAIL = True 
+ACCOUNT_EMAIL_SUBJECT_PREFIX = ''
+
+# Twilio SendGrid
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'apikey'
+EMAIL_HOST_PASSWORD = os.getenv("SENDGRID_API_KEY")
+
+DEFAULT_FROM_EMAIL = 'matt@tinytrader.io'

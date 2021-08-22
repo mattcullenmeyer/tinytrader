@@ -1,0 +1,14 @@
+{% extends "account/email/base_message.html" %}
+{% load account %}
+
+{% block content %}
+<div>
+  <p style="font-weight: bold;">Hello!</p>
+  <p>Thanks for joining TinyTrader!</p>
+  <p>Please verify your email address by clicking the link below.</p>
+  <p>{{ activate_url }}</p>
+  <p>Feel free to ignore this email if you didn't sign up for TinyTrader.</p>
+  <p>Happy investing,</p>
+  <p>Matt</p>
+</div>
+{% endblock content %}

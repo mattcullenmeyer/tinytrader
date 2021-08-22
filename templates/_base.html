@@ -29,52 +29,71 @@
 </head>
 <body>
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container">
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      
+      <a class="navbar-brand px-2 py-1 fs-3" href="{% url 'pages:home' %}">
+        <i class="bi bi-chevron-double-right d-inline-block align-baseline text-primary"></i>
+        <span>tinytrader<span class="text-primary" style="font-weight: 600">.</span>io</span>
+      </a>
+      
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarToggler">
         
-        <a class="navbar-brand px-2 py-1 fs-3" href="{% url 'pages:home' %}">
-          <i class="bi bi-chevron-double-right d-inline-block align-baseline text-primary"></i>
-          <span>tinytrader<span class="text-primary" style="font-weight: 600">.</span>io</span>
-        </a>
+        <form class="d-flex ms-auto px-2 py-1">
+          <div class="input-group">
+            <span class="input-group-text bg-transparent bi-search"></span>
+            <input id="nav-search" class="form-control" type="search" placeholder="Search companies" aria-label="Search">
+          </div>
+        </form>
         
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item px-2 py-1">
+            <a class="nav-link text-body" href="{% url 'blog:blog' %}">Blog</a>
+          </li>
+          <li class="nav-item px-2 py-1">
+            <a class="nav-link text-body" href="{% url 'pages:about' %}">About</a>
+          </li>
+          {% if user.is_authenticated %}
+          <li class="nav-item px-2 py-1">
+              <a class="nav-link text-body" href="{% url 'account_logout' %}">Log Out</a>
+          </li>
+          {% else %}
+          <li class="nav-item px-2 py-1">
+              <a class="btn btn-outline-primary" href="{% url 'account_login' %}?next={{request.path}}">Log In</a>
+          </li>
+          <li class="nav-item px-2 py-1">
+              <a class="btn btn-primary" href="{% url 'account_signup' %}?next={{request.path}}">Sign Up</a>
+          </li>
+          {% endif %}
+        </ul>
         
-        <div class="collapse navbar-collapse" id="navbarToggler">
-          
-          <form class="d-flex ms-auto px-2 py-1">
-            <div class="input-group">
-              <span class="input-group-text bg-transparent bi-search"></span>
-              <input id="nav-search" class="form-control" type="search" placeholder="Search companies" aria-label="Search">
-            </div>
-          </form>
-          
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item px-2 py-1">
-              <a class="nav-link text-body" href="{% url 'blog:blog' %}">Blog</a>
-            </li>
-            <li class="nav-item px-2 py-1">
-              <a class="nav-link text-body" href="{% url 'pages:about' %}">About</a>
-            </li>
-            {% if user.is_authenticated %}
-            <li class="nav-item px-2 py-1">
-                <a class="nav-link text-body" href="{% url 'account_logout' %}">Log Out</a>
-            </li>
-            {% else %}
-            <li class="nav-item px-2 py-1">
-                <a class="btn btn-outline-primary" href="{% url 'account_login' %}">Log In</a>
-            </li>
-            <li class="nav-item px-2 py-1">
-                <a class="btn btn-primary" href="{% url 'account_signup' %}">Sign Up</a>
-            </li>
-            {% endif %}
-          </ul>
-          
-        </div>
       </div>
-    </nav>
+    </div>
+  </nav>
+  {% if user.email_verified is False %}
+  <div class="alert alert-primary" role="alert">
+    <div class="container" style="display: flex; align-items: center; justify-content: center;">
+      <i class="bi bi-info-circle" style="font-size: 1.4rem;"></i>
+      <span style="margin-left: 1rem;">
+        Please verify your email using the link sent to <span style="font-weight: bold;">{{ user.email }}</span>.
+      </span>
+      <!-- https://stackoverflow.com/questions/66629248/allauth-resending-verification-redirects-to-another-page -->
+        <form action="{% url 'users:resend_verfication' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="email" value="{{user.email}}"/>
+        <input type="hidden" name="next" value="{{request.path}}"/>
+        <button type="submit" class="btn btn-outline-primary resend-verification-button" name="action_send">
+          Resend Verification
+        </button>
+      </form>
+    </div>
+  </div>
+  {% endif %}
 
   {% block content %}
   {% endblock content %}
