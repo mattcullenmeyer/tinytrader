@@ -48,7 +48,7 @@ p {
 }
 
 .resend-verification-button:hover {
-  background-color: white;
+  background-color: #084298;
   border-color: #084298; 
-  color: #084298;
+  color: white;
 }
