@@ -10,15 +10,42 @@
 {% block content %}
 
 <div class="container">
-  <div class="row">
-    <div class="col mb-4  mt-3">
-      <div class="card-body">
-        <h1>{% block title %} {{ post.title }} {% endblock title %}</h1>
-        <p class="card-text text-muted h6">{{ post.author.first_name }} {{ post.author.last_name }} | {{ post.updated_on }} </p>
-        <p class="card-text">{{ post.content | markdown }}</p>
-      </div>
-    </div>
+  <div class="card-body">
+    <h1>{% block title %} {{ post.title }} {% endblock title %}</h1>
+    <p class="card-text text-muted h6">{{ post.author.first_name }} {{ post.author.last_name }} | {{ post.updated_on }}</p>
+    <p class="card-text">{{ post.content | markdown }}</p>
   </div>
+
+  <h2 style="margin-bottom: 2rem;">Comments</h2>
+  {% for comment in comments.all %}
+    {% if comment.parent is None %}
+      <div>
+        <h5 class="card-title" style="display: inline-block; margin-right: 1rem; margin-top: 0;">{{ comment.name.username }}</h5>
+        <h6 class="card-text text-muted" style="display: inline-block;">{{ comment.created_on }}</h6>
+        <p class="card-text" style="margin-top: 0;">{{ comment.body }}</p>
+      </div>
+      <div class="dropdown-divider"></div>
+
+      {% for reply in comment.replies.all %}
+      <div style="display: flex">
+        <div style="width: 3%"></div>
+        <div style="width: 97%">
+          <div>
+            <h5 class="card-title" style="display: inline-block; margin-right: 1rem; margin-top: 0;">{{ reply.name.username }}</h5>
+            <h6 class="card-text text-muted" style="display: inline-block;">{{ reply.created_on }}</h6>
+            <p class="card-text" style="margin-top: 0;">{{ reply.body }}</p>
+          </div>
+          <div class="dropdown-divider"></div>
+        </div>
+      </div>
+      {% endfor %}
+    {% endif %}
+  {% endfor %}
+
 </div>
 
 {% endblock content %}
+
+{% block scripts %}
+
+{% endblock scripts %}
