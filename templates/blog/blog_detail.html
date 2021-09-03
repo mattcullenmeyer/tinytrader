@@ -52,7 +52,7 @@
 
 </div>
 
-{% if user.email_verified is True %}
+{% if user.email_verified %}
 <div class="comment-form-container">
   <div class="container">
     <form id="comment-form" action="{% url 'blog:post' post.slug  %}" method="post">
@@ -69,6 +69,28 @@
         </div>
       </div>
     </form>
+  </div>
+</div>
+{% elif user.email_verified is False %}
+<div class="comment-alert-container">
+  <div class="alert alert-warning" role="alert">
+    <div class="container" style="display: flex; align-items: center; justify-content: center;">
+      <i class="bi bi-info-circle" style="font-size: 1.4rem;"></i>
+      <span style="margin-left: 1rem;">
+        Please verify your email to submit comments.
+      </span>
+    </div>
+  </div>
+</div>
+{% else %}
+<div class="comment-alert-container">
+  <div class="alert alert-warning" role="alert">
+    <div class="container" style="display: flex; align-items: center; justify-content: center;">
+      <i class="bi bi-info-circle" style="font-size: 1.4rem;"></i>
+      <span style="margin-left: 1rem;">
+        Please <a href="{% url 'account_signup' %}?next={{request.path}}">Sign Up</a> to submit comments.
+      </span>
+    </div>
   </div>
 </div>
 {% endif %}

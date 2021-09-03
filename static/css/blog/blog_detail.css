@@ -1,15 +1,24 @@
-.comment-card {
-  display: flex;
-}
-
 .comment-form-container {
   position: fixed;
   bottom: 0;
   width: 100%;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 8px;
+  padding-bottom: 8px;
   background-color: #f8f9fa;
   border-top: 1px solid rgba(0,0,0,.15);
+}
+
+.comment-alert-container {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 78px;
+}
+
+.comment-alert-container .alert {
+  margin-bottom: 0;
+  height: 100%;
+  display: flex;
 }
 
 .comment-form-row {
@@ -43,6 +52,10 @@
   margin-bottom: 2rem;
 }
 
+.comment-card {
+  display: flex;
+}
+
 .comment-card-width-full {
   width: 100%;
 }
@@ -72,5 +85,5 @@
 }
 
 footer {
-  margin-bottom: 101px;
+  margin-bottom: 78px;
 }
