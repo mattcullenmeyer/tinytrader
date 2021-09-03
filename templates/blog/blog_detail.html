@@ -52,6 +52,7 @@
 
 </div>
 
+{% if user.email_verified is True %}
 <div class="comment-form-container">
   <div class="container">
     <form id="comment-form" action="{% url 'blog:post' post.slug  %}" method="post">
@@ -70,6 +71,7 @@
     </form>
   </div>
 </div>
+{% endif %}
 
 {% endblock content %}
 
