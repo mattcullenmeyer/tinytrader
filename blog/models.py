@@ -35,7 +35,7 @@ class Comment(models.Model):
   name = models.ForeignKey(User, on_delete= models.PROTECT, related_name='commenters')
   parent = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True, related_name='replies')
   body = models.TextField()
-  created_on = models.DateField(auto_now_add=True)
+  created_on = models.DateTimeField(auto_now_add=True)
   active = models.BooleanField(default=True)
 
   class Meta:

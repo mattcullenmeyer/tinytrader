@@ -4,6 +4,7 @@
 
 {% block styles %}
   <link rel="stylesheet" href="{% static 'css/blog/blog.css' %}">
+  <link rel="stylesheet" href="{% static 'css/blog/blog_detail.css' %}">
   <link rel="stylesheet" href="{% static 'css/blog/blog-syntax-highlighting.css' %}">
 {% endblock %}
 
@@ -16,24 +17,30 @@
     <p class="card-text">{{ post.content | markdown }}</p>
   </div>
 
-  <h2 style="margin-bottom: 2rem;">Comments</h2>
+  <h2 class="comment-header">Comments</h2>
+  
+  <div id='comment-section'>
   {% for comment in comments.all %}
     {% if comment.parent is None %}
-      <div>
-        <h5 class="card-title" style="display: inline-block; margin-right: 1rem; margin-top: 0;">{{ comment.name.username }}</h5>
-        <h6 class="card-text text-muted" style="display: inline-block;">{{ comment.created_on }}</h6>
-        <p class="card-text" style="margin-top: 0;">{{ comment.body }}</p>
+      <div id="comment-{{ comment.id }}" class="comment-card">
+        <div class="comment-card-width-full">
+          <div>
+            <h5 class="card-title comment-card-username">{{ comment.name.username }}</h5>
+            <h6 class="card-text comment-card-date">{{ comment.created_on|date:"M j, Y" }}</h6>
+            <p class="card-text comment-card-body">{{ comment.body }}</p>
+          </div>
+          <div class="dropdown-divider"></div>
+        </div>
       </div>
-      <div class="dropdown-divider"></div>
 
       {% for reply in comment.replies.all %}
-      <div style="display: flex">
-        <div style="width: 3%"></div>
-        <div style="width: 97%">
+      <div id="comment-{{ comment.id }}" class="comment-card">
+        <div class="comment-card-width-margin"></div>
+        <div class="comment-card-width-offset">
           <div>
-            <h5 class="card-title" style="display: inline-block; margin-right: 1rem; margin-top: 0;">{{ reply.name.username }}</h5>
-            <h6 class="card-text text-muted" style="display: inline-block;">{{ reply.created_on }}</h6>
-            <p class="card-text" style="margin-top: 0;">{{ reply.body }}</p>
+            <h5 class="card-title comment-card-username">{{ reply.name.username }}</h5>
+            <h6 class="card-text comment-card-date">{{ reply.created_on|date:"M j, Y" }}</h6>
+            <p class="card-text comment-card-body">{{ reply.body }}</p>
           </div>
           <div class="dropdown-divider"></div>
         </div>
@@ -41,11 +48,32 @@
       {% endfor %}
     {% endif %}
   {% endfor %}
+  </div>
 
+</div>
+
+<div class="comment-form-container">
+  <div class="container">
+    <form id="comment-form" action="{% url 'blog:post' post.slug  %}" method="post">
+      {% csrf_token %}
+      <div class="comment-form-row">
+        <div class="comment-form-input">
+          <input type="hidden" name="name" value="{{ user.id }}" />
+          <input type="hidden" name="post" value="{{ post.id }}" />
+          <label for="comment-input" class="sr-only">Comment</label>
+          <textarea id="comment-input" name="body" placeholder="Write a comment..." rows="1" class="form-control-lg comment-form-textarea"></textarea>
+        </div>
+        <div>
+          <button type="submit" class="btn btn-lg comment-form-button">Submit</button>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>
 
 {% endblock content %}
 
 {% block scripts %}
-
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.0/dist/js.cookie.min.js" integrity="sha256-pUYbeWfQ0TisH2PabhAZLCzI8qGOJop0mEWjbJBcZLQ=" crossorigin="anonymous"></script>
+  <script src="{% static 'js/blog/blog_detail.js' %}"></script>
 {% endblock scripts %}
