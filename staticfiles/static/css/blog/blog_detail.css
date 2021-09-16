@@ -38,9 +38,9 @@
 .comment-form-button {
   background: #FFD814;
   border-color: #FFD814;
-  padding-left: 50px;
-  padding-right: 50px;
-  margin-left: 25px;
+  padding-left: 25px;
+  padding-right: 25px;
+  margin-left: 15px;
 }
 
 .comment-form-button:hover {
