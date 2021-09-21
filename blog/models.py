@@ -9,6 +9,7 @@ STATUS = (
 class Post(models.Model):
   title = models.CharField(max_length=200, unique=True)
   slug = models.SlugField(max_length=200, unique=True)
+  metadescription = models.CharField(max_length=200)
   author = models.ForeignKey(User, on_delete= models.PROTECT, related_name='blog_posts')
   updated_on = models.DateField()
   preview = models.TextField()
