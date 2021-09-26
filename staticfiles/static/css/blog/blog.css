@@ -8,47 +8,16 @@ img {
   margin: 0 auto;
 }
 
-h1 {
-  font-size: 36px;
-  font-weight: 600;
-  font-family: geo-wf, Helvetica, Arial;
-  line-height: 1.333;
-  color: rgb(38, 39, 44);
-  letter-spacing: 0.5px;
-  display: block;
-  font-stretch: 100%;
-  font-style: normal;
+.center {
+  text-align: center;
 }
 
-h2 {
-  font-size: 24px;
-  font-weight: 600;
-  font-family: geo-wf, Helvetica, Arial;
-  line-height: 1.333;
-  color: rgb(38, 39, 44);
-  letter-spacing: 0.5px;
-  display: block;
-  font-stretch: 100%;
-  font-style: normal;
-  padding-top: 40px;
-  margin-bottom: 30px;
-}
-
-p {
-  font-size: 20px;
-  font-weight: 400;
-  font-family: geo-wf, Helvetica, Arial;
-  line-height: 1.75;
-  color: rgb(38, 39, 44);
-  letter-spacing: 0.5px;
-  display: block;
-  font-stretch: 100%;
-  font-style: normal;
-  margin-bottom: 33px;
+.right {
+  text-align: right;
 }
 
 .codehilite {
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .highlight-text {
@@ -63,17 +32,8 @@ p {
   img {
     width: 85%;
   }
-  h1 {
-    font-size: 30px;
-  }
-  h2 {
-    font-size: 22px;
-  }
-  p {
-    font-size: 18px;
-  }
   .codehilite {
-    font-size: 18px;
+    font-size: 16px;
   }
 }
 
@@ -82,16 +42,7 @@ p {
   img {
     width: 100%;
   } 
-  h1 {
-    font-size: 27px;
-  }
-  h2 {
-    font-size: 20px;
-  }
-  p {
-    font-size: 16px;
-  }
   .codehilite {
-    font-size: 16px;
+    font-size: 14px;
   }
 }

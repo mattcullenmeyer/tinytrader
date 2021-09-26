@@ -4,7 +4,6 @@
 }
 
 .navbar {
-  /*margin-bottom: 2rem;*/
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
 }
 
@@ -12,33 +11,73 @@
   z-index: 2000 !important;
 }
 
+body {
+  font-family: geo-wf, Helvetica, Arial;
+  line-height: 1.75;
+  color: rgb(38, 39, 44);
+  font-size: 20px;
+}
 
 h1 {
-  font-size: 2.5rem;
-  color: #333e48;
-  font-weight: 700;
+  font-size: 36px;
+  font-weight: 600;
+}
+
+h2 {
+  font-size: 26px;
+  font-weight: 600;
+  padding-top: 40px;
+  margin-bottom: 30px;
 }
 
 h3 {
-  font-size: 1.5rem;
-  color: #333e48;
+  font-size: 24px;
   font-weight: 500;
-  margin-top: 1rem;
-}
-
-h5 {
-  font-size: 1.1rem;
-  line-height: 2rem;
-  color: #333e48;
-  font-weight: 500;
-  margin-top: 2rem;
+  padding-top: 20px;
+  margin-bottom: 30px;
 }
 
 p {
-  font-size: 1.1rem;
-  line-height: 2rem;
-  color: #333e48;
-  margin-top: 1.5rem;
+  font-size: 20px;
+  margin-bottom: 30px;
+}
+
+ol, ul {
+  margin-bottom: 30px;
+}
+
+.nav-link, .alert {
+  font-size: 16px;
+}
+
+.footer-link {
+  font-size: 16px;
+}
+
+.card-body a {
+  background-color: rgba(187,239,253,0.3);
+  border-bottom: 1px solid rgba(0,0,0,0.2);
+  color: rgb(38, 39, 44);
+  text-decoration: none;
+}
+
+.card-body a:hover {
+  background-color: #bbeffd;
+  border-bottom-color: rgb(38, 39, 44);
+  color: rgb(38, 39, 44);
+}
+
+table {
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+table td {
+  padding: 5px 15px;
+}
+
+table, th, td {
+  border: 1px solid gray;
 }
 
 .resend-verification-button {
@@ -51,4 +90,42 @@ p {
   background-color: #084298;
   border-color: #084298; 
   color: white;
+}
+
+/* tablet */
+@media only screen and (max-width:1000px) {
+  h1 {
+    font-size: 30px;
+  }
+  h2 {
+    font-size: 22px;
+  }
+  p {
+    font-size: 18px;
+  }
+  body {
+    font-size: 18px;
+  }
+  table {
+    font-size: 16px;
+  }
+}
+
+/* mobile devices */
+@media only screen and (max-width:480px) {
+  h1 {
+    font-size: 27px;
+  }
+  h2 {
+    font-size: 20px;
+  }
+  p {
+    font-size: 16px;
+  }
+  body {
+    font-size: 16px;
+  }
+  table {
+    font-size: 14px;
+  }
 }
