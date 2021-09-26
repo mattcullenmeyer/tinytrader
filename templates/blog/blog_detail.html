@@ -19,42 +19,42 @@
     <h1>{% block title %}{{ post.title }}{% endblock title %}</h1>
     <p class="card-text text-muted h6">{{ post.author.first_name }} {{ post.author.last_name }} | {{ post.updated_on }}</p>
     <p class="card-text">{{ post.content | markdown }}</p>
-  </div>
 
-  <h2 class="comment-header">Comments</h2>
-
-  {% for comment in comments.all %}
-    {% if comment.parent is None %}
-      <div id="comment-{{ comment.id }}" class="comment-card">
-        <div class="comment-card-width-full">
-          <div>
-            <h5 class="card-title comment-card-username">{{ comment.name.username }}</h5>
-            <h6 class="card-text comment-card-date">{{ comment.created_on|date:"M j, Y" }}</h6>
-            <p class="card-text comment-card-body">{{ comment.body }}</p>
+    <h2 class="comment-header">Comments</h2>
+  
+    {% for comment in comments.all %}
+      {% if comment.parent is None %}
+        <div id="comment-{{ comment.id }}" class="comment-card">
+          <div class="comment-card-width-full">
+            <div>
+              <h5 class="card-title comment-card-username">{{ comment.name.username }}</h5>
+              <h6 class="card-text comment-card-date">{{ comment.created_on|date:"M j, Y" }}</h6>
+              <p class="card-text comment-card-body">{{ comment.body }}</p>
+            </div>
+            <div class="dropdown-divider"></div>
           </div>
-          <div class="dropdown-divider"></div>
         </div>
-      </div>
-
-      {% for reply in comment.replies.all %}
-      <div id="comment-{{ comment.id }}" class="comment-card">
-        <div class="comment-card-width-margin"></div>
-        <div class="comment-card-width-offset">
-          <div>
-            <h5 class="card-title comment-card-username">{{ reply.name.username }}</h5>
-            <h6 class="card-text comment-card-date">{{ reply.created_on|date:"M j, Y" }}</h6>
-            <p class="card-text comment-card-body">{{ reply.body }}</p>
+  
+        {% for reply in comment.replies.all %}
+        <div id="comment-{{ comment.id }}" class="comment-card">
+          <div class="comment-card-width-margin"></div>
+          <div class="comment-card-width-offset">
+            <div>
+              <h5 class="card-title comment-card-username">{{ reply.name.username }}</h5>
+              <h6 class="card-text comment-card-date">{{ reply.created_on|date:"M j, Y" }}</h6>
+              <p class="card-text comment-card-body">{{ reply.body }}</p>
+            </div>
+            <div class="dropdown-divider"></div>
           </div>
-          <div class="dropdown-divider"></div>
         </div>
-      </div>
-      {% endfor %}
-    {% endif %}
-  {% empty %}
-      <p>No comments yet — be the first to leave one!</p>
-  {% endfor %}
+        {% endfor %}
+      {% endif %}
+    {% empty %}
+        <p>No comments yet — be the first to leave one!</p>
+    {% endfor %}
+    </div>
+  
   </div>
-
 </div>
 
 {% if user.email_verified %}
