@@ -26,6 +26,8 @@ ALLOWED_HOSTS = [
   '127.0.0.1'
 ]
 
+CSRF_COOKIE_DOMAIN = ".tinytrader.io"
+SESSION_COOKIE_DOMAIN = ".tinytrader.io"
 
 # Application definition
 
