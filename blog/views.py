@@ -1,6 +1,6 @@
 from django.http.response import JsonResponse
 from django.views.generic import ListView, DetailView
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse
 from django.core import serializers
 import json
@@ -8,6 +8,9 @@ import json
 from .models import Post, Comment
 from users.models import User
 from .forms import CommentForm
+
+import os
+from django.conf import settings
 
 class BlogListView(ListView):
   queryset = Post.objects.filter(status=1).order_by('-updated_on')
@@ -19,7 +22,8 @@ class BlogDraftListView(ListView):
 
 def BlogDetailView(request, slug):
   template_name = 'blog/blog_detail.html'
-  post = Post.objects.get(slug=slug)
+  # post = Post.objects.get(slug=slug)
+  post = get_object_or_404(Post, slug=slug)
   comments = post.comments.filter(active=True)
   
   if request.method == 'POST':
@@ -51,3 +55,15 @@ def BlogDetailView(request, slug):
     }
 
     return render(request, template_name, context)
+
+def BlogDraftView(request):
+  f = open(os.path.join(settings.BASE_DIR, 
+    'backup/blog_posts/draft.md')
+  )
+  post = f.read()
+  f.close()
+  context = {
+    'post': post
+  }
+  template_name = 'blog/blog_draft.html'
+  return render(request, template_name, context)

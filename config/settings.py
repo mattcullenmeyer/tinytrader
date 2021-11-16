@@ -26,8 +26,9 @@ ALLOWED_HOSTS = [
   '127.0.0.1'
 ]
 
-CSRF_COOKIE_DOMAIN = ".tinytrader.io"
-SESSION_COOKIE_DOMAIN = ".tinytrader.io"
+CSRF_COOKIE_DOMAIN = os.getenv('CSRF_COOKIE_DOMAIN', None)
+SESSION_COOKIE_DOMAIN = os.getenv('SESSION_COOKIE_DOMAIN', None)
+CORS_ALLOWED_ORIGINS = os.getenv('CORS_ALLOWED_ORIGINS').split(',')
 
 # Application definition
 
@@ -47,6 +48,9 @@ INSTALLED_APPS = [
   'django_filters', # https://www.django-rest-framework.org/api-guide/filtering/#djangofilterbackend
   'allauth', # https://django-allauth.readthedocs.io/en/latest/
   'allauth.account',
+  'corsheaders', # used for making requests from subdomain
+  'dj_rest_auth', # used for user authentication endpoints
+  'dj_rest_auth.registration', # used for user registration endpoint
 
   # Local
   'users',
@@ -56,6 +60,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+  'corsheaders.middleware.CorsMiddleware',
   'django.middleware.security.SecurityMiddleware',
   'django.contrib.sessions.middleware.SessionMiddleware',
   'django.middleware.common.CommonMiddleware',

@@ -1,0 +1,19 @@
+{% extends '_base.html' %}
+{% load static %}
+{% load markdown_extras %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{% static 'css/blog/blog.css' %}">
+  <link rel="stylesheet" href="{% static 'css/blog/blog_detail.css' %}">
+  <link rel="stylesheet" href="{% static 'css/blog/blog-syntax-highlighting.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+  <div class="card-body">
+    <p class="card-text">{{ post | markdown }}</p> 
+  </div>
+</div>
+
+{% endblock content %}
