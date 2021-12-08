@@ -10,4 +10,5 @@ urlpatterns = [
   path('dj-rest-auth/registration/account-confirm-email/<str:key>/', ConfirmEmailView.as_view()), # Needs to be defined before registration path
   path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
   path('dj-rest-auth/account-confirm-email/', VerifyEmailView.as_view(), name='account_email_verification_sent'),
+  path('user/', views.UserView.as_view()),
 ]

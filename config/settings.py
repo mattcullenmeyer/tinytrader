@@ -29,6 +29,12 @@ ALLOWED_HOSTS = [
 CSRF_COOKIE_DOMAIN = os.getenv('CSRF_COOKIE_DOMAIN', None)
 SESSION_COOKIE_DOMAIN = os.getenv('SESSION_COOKIE_DOMAIN', None)
 CORS_ALLOWED_ORIGINS = os.getenv('CORS_ALLOWED_ORIGINS').split(',')
+CORS_ALLOW_CREDENTIALS = True # allows cookies in cross-site http requests
+CSRF_COOKIE_HTTPONLY = False
+SESSION_COOKIE_HTTPONLY = False
+REST_USE_JWT = True
+JWT_AUTH_COOKIE = 'fermi_auth_token'
+JWT_AUTH_HTTPONLY = False
 
 # Application definition
 
@@ -179,6 +185,7 @@ REST_FRAMEWORK = {
   'DEFAULT_AUTHENTICATION_CLASSES': (
     'rest_framework.authentication.TokenAuthentication',
     'rest_framework.authentication.SessionAuthentication',
+    'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
   ),
   'DEFAULT_PERMISSION_CLASSES': (
     'rest_framework.permissions.IsAdminUser',
