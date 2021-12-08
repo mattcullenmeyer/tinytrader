@@ -48,6 +48,7 @@ INSTALLED_APPS = [
   'django_filters', # https://www.django-rest-framework.org/api-guide/filtering/#djangofilterbackend
   'allauth', # https://django-allauth.readthedocs.io/en/latest/
   'allauth.account',
+  'allauth.socialaccount',
   'corsheaders', # used for making requests from subdomain
   'dj_rest_auth', # used for user authentication endpoints
   'dj_rest_auth.registration', # used for user registration endpoint
@@ -200,6 +201,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 ACCOUNT_SESSION_REMEMBER = True # remember username and password of users
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False # only have to enter password once on signup
 ACCOUNT_USERNAME_REQUIRED = True 
+ACCOUNT_LOGOUT_ON_PASSWORD_CHANGE = True
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email' 
 ACCOUNT_EMAIL_REQUIRED = True 
 ACCOUNT_UNIQUE_EMAIL = True 
