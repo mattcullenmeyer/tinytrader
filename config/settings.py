@@ -18,7 +18,10 @@ CORS_ALLOWED_ORIGINS = os.getenv('CORS_ALLOWED_ORIGINS').split(',')
 
 REST_USE_JWT = True
 SIMPLE_JWT = {
-  'ACCESS_TOKEN_LIFETIME': datetime.timedelta(days=7),
+  # token expirations must align with frontend
+  'ACCESS_TOKEN_LIFETIME': datetime.timedelta(days=7), 
+  'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=14),
+  'LEEWAY': datetime.timedelta(days=1),
 }
 
 # Application definition
