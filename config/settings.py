@@ -1,5 +1,6 @@
 from pathlib import Path
 import os
+import datetime
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -7,34 +8,21 @@ load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-# environment variables are read as strings (eg 'False'), 
-# therefore DEBUG must be converted to a boolean
 DEBUG = os.getenv('DEBUG', False) == 'True'
 
-ALLOWED_HOSTS = [
-  'tinytrader.io',
-  'www.tinytrader.io',
-  '167.71.183.49',
-  '127.0.0.1'
-]
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(',')
 
-CSRF_COOKIE_DOMAIN = os.getenv('CSRF_COOKIE_DOMAIN', None)
-SESSION_COOKIE_DOMAIN = os.getenv('SESSION_COOKIE_DOMAIN', None)
 CORS_ALLOWED_ORIGINS = os.getenv('CORS_ALLOWED_ORIGINS').split(',')
-CORS_ALLOW_CREDENTIALS = True # allows cookies in cross-site http requests
-CSRF_COOKIE_HTTPONLY = False
-SESSION_COOKIE_HTTPONLY = False
+
 REST_USE_JWT = True
-JWT_AUTH_COOKIE = 'fermi_auth_token'
-JWT_AUTH_HTTPONLY = False
+SIMPLE_JWT = {
+  # token expirations must align with frontend
+  'ACCESS_TOKEN_LIFETIME': datetime.timedelta(days=7), 
+  'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=14),
+  'LEEWAY': datetime.timedelta(days=1),
+}
 
 # Application definition
 
