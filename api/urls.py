@@ -18,8 +18,8 @@ router.register('users', user_views.UsersViewSet, 'users')
 
 app_name = 'api'
 urlpatterns = [
-	path('', include(router.urls)),
-	path('api-token-auth/', obtain_auth_token, name='api-token-auth'),
+  path('', include(router.urls)),
+  path('api-token-auth/', obtain_auth_token, name='api-token-auth'),
   path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
   path('signup/email/<str:email>/', user_views.SignupEmailView.as_view(), name='signup-email'),
   path('user/detail/', user_views.UserDetailView.as_view(), name='user-detail'),
