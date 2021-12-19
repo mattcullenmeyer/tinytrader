@@ -5,7 +5,7 @@ from allauth.account.models import EmailAddress
 from allauth.account.adapter import get_adapter
 from django.contrib import messages
 from django.shortcuts import redirect
-from rest_framework import views, viewsets
+from rest_framework import viewsets, generics
 from users import serializers
 # from django.contrib.auth.models import User
 from users import models
@@ -43,12 +43,19 @@ def resend_verfication(request):
         pass
     return redirect(next)
 
-class UsersView(viewsets.ModelViewSet):
+class UsersViewSet(viewsets.ModelViewSet):
   queryset = models.User.objects.all()
   serializer_class = serializers.UserSerializer
+  permission_classes = [permissions.IsAdminUser]
 
-class UserView(views.APIView):
+class UserDetailView(generics.RetrieveAPIView):
   permission_classes = [permissions.IsAuthenticated]
   def get(self, request):
     serializer = serializers.UserSerializer(request.user)
     return Response(serializer.data)
+
+class SignupEmailView(generics.RetrieveAPIView):
+  serializer_class = serializers.SignupEmailSerializer
+  permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+  queryset = models.User.objects.all()
+  lookup_field = 'email'
