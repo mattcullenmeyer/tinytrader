@@ -21,8 +21,8 @@ router.register('users', user_views.UsersViewSet, 'users')
 app_name = 'api'
 urlpatterns = [
   path('', include(router.urls)),
-  path('api-token-auth/', obtain_auth_token, name='api_token_auth'),
-  path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+  path('api-token-auth/', obtain_auth_token, name='api_token_auth'), # TODO: do we still need this??
+  path('api-auth/', include('rest_framework.urls', namespace='rest_framework')), # TODO: do we need this??
   path('signup/email/<str:email>/', user_views.SignupEmailView.as_view(), name='signup_email'),
   path('user/detail/', user_views.UserDetailView.as_view(), name='user_detail'),
 
