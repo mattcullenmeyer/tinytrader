@@ -19,9 +19,11 @@ CORS_ALLOWED_ORIGINS = os.getenv('CORS_ALLOWED_ORIGINS').split(',')
 REST_USE_JWT = True
 SIMPLE_JWT = {
   # token expirations must align with frontend
-  'ACCESS_TOKEN_LIFETIME': datetime.timedelta(days=7), 
+  'ACCESS_TOKEN_LIFETIME': datetime.timedelta(days=1/24), 
   'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=14),
-  'LEEWAY': datetime.timedelta(days=1),
+  'LEEWAY': datetime.timedelta(days=1/48),
+  'ROTATE_REFRESH_TOKENS': True,
+  'BLACKLIST_AFTER_ROTATION': True,
 }
 
 # Application definition
@@ -42,10 +44,11 @@ INSTALLED_APPS = [
   'django_filters', # https://www.django-rest-framework.org/api-guide/filtering/#djangofilterbackend
   'allauth', # https://django-allauth.readthedocs.io/en/latest/
   'allauth.account',
-  'allauth.socialaccount',
+  'allauth.socialaccount', # dependency of allauth migration
   'corsheaders', # used for making requests from subdomain
   'dj_rest_auth', # used for user authentication endpoints
   'dj_rest_auth.registration', # used for user registration endpoint
+  'rest_framework_simplejwt.token_blacklist', # required for SIMPLE_JWT BLACKLIST_AFTER_ROTATION setting
 
   # Local
   'users',

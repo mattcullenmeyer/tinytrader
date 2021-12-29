@@ -31,4 +31,5 @@ urlpatterns = [
   path('account-confirm-email/<str:key>/', ConfirmEmailView.as_view()), # needs to be defined before registration path
   path('signup/', RegisterView.as_view(), name='rest_register'),
   path('account-confirm-email/', VerifyEmailView.as_view(), name='account_email_verification_sent'), # only needed if email verification is mandatory
+  path('token/refresh/', user_views.CustomTokenRefreshView.as_view(), name='token_refresh'),
 ]

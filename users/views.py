@@ -10,6 +10,7 @@ from users import serializers
 # from django.contrib.auth.models import User
 from users import models
 from rest_framework import permissions
+from rest_framework_simplejwt.views import TokenViewBase
 
 
 # https://stackoverflow.com/questions/54467321/how-to-tell-if-users-email-address-has-been-verified-using-django-allauth-res
@@ -59,3 +60,6 @@ class SignupEmailView(generics.RetrieveAPIView):
   permission_classes = [permissions.IsAuthenticatedOrReadOnly]
   queryset = models.User.objects.all()
   lookup_field = 'email'
+
+class CustomTokenRefreshView(TokenViewBase):
+  serializer_class = serializers.CustomTokenRefreshSerializer
