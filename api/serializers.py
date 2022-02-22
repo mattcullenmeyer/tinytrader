@@ -57,3 +57,8 @@ class MetricSerializer(serializers.ModelSerializer):
     }
 
 # https://www.django-rest-framework.org/api-guide/relations/#nested-relationships
+
+class CryptoSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = models.Crypto
+    fields = '__all__'

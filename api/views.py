@@ -41,3 +41,8 @@ class MetricViewSet(viewsets.ModelViewSet):
   lookup_field = 'ticker'
   permission_classes = [permissions.IsAuthenticatedOrReadOnly]
   #filterset_fields = '__all__'
+
+class CryptoViewSet(viewsets.ModelViewSet):
+  queryset = models.Crypto.objects.all()
+  serializer_class = serializers.CryptoSerializer
+  permission_classes = [permissions.IsAuthenticatedOrReadOnly]

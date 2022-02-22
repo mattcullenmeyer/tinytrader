@@ -1,4 +1,5 @@
 from django.db import models
+import uuid
 
 class Ticker(models.Model):
 	ticker = models.CharField(max_length=6, unique=True)
@@ -171,3 +172,15 @@ class Metric(models.Model):
 
 	def __str__(self):
 		return f'{self.ticker}'
+
+class Crypto(models.Model):
+  id = models.UUIDField(
+    primary_key=True,
+    default=uuid.uuid4,
+    editable=True,
+  )
+  symbol = models.CharField(max_length=6, unique=True)
+  name = models.CharField(max_length=200)
+  slug = models.SlugField(max_length=200)
+  is_active = models.IntegerField() 
+  status = models.SlugField(max_length=200)
