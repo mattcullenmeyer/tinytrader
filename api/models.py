@@ -174,13 +174,13 @@ class Metric(models.Model):
 		return f'{self.ticker}'
 
 class Crypto(models.Model):
-  id = models.UUIDField(
-    primary_key=True,
-    default=uuid.uuid4,
-    editable=True,
-  )
+  id = models.IntegerField(primary_key=True)
   symbol = models.CharField(max_length=6, unique=True)
   name = models.CharField(max_length=200)
   slug = models.SlugField(max_length=200)
-  is_active = models.IntegerField() 
-  status = models.SlugField(max_length=200)
+
+class CryptoPrices(models.Model):
+  crypto_id = models.ForeignKey(Crypto, on_delete=models.CASCADE, blank=True, null=True)
+  date = models.DateField()
+  price = models.FloatField()
+  volume = models.FloatField()

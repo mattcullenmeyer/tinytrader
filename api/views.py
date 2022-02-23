@@ -46,3 +46,9 @@ class CryptoViewSet(viewsets.ModelViewSet):
   queryset = models.Crypto.objects.all()
   serializer_class = serializers.CryptoSerializer
   permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+class CryptoPricesViewSet(viewsets.ModelViewSet):
+  queryset = models.CryptoPrices.objects.all()
+  serializer_class = serializers.CryptoPricesSerializer
+  permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+  filterset_fields = ('crypto_id', )

@@ -17,6 +17,7 @@ router.register(r'liquidity', api_views.LiquidityViewSet, 'liquidity')
 router.register(r'metadata', api_views.MetadataViewSet, 'metadata')
 router.register(r'metric', api_views.MetricViewSet, 'metric')
 router.register(r'crypto', api_views.CryptoViewSet, 'crypto')
+router.register(r'prices', api_views.CryptoPricesViewSet, 'prices')
 router.register('users', user_views.UsersViewSet, 'users')
 
 app_name = 'api'

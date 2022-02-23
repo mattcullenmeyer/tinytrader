@@ -62,3 +62,8 @@ class CryptoSerializer(serializers.ModelSerializer):
   class Meta:
     model = models.Crypto
     fields = '__all__'
+
+class CryptoPricesSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = models.CryptoPrices
+    fields = '__all__'
