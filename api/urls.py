@@ -17,7 +17,7 @@ router.register(r'liquidity', api_views.LiquidityViewSet, 'liquidity')
 router.register(r'metadata', api_views.MetadataViewSet, 'metadata')
 router.register(r'metric', api_views.MetricViewSet, 'metric')
 router.register(r'crypto', api_views.CryptoViewSet, 'crypto')
-router.register(r'prices', api_views.CryptoPricesViewSet, 'prices')
+router.register(r'crypto/prices/historical', api_views.CryptoPricesHistoricalViewSet, 'crypto_prices_historical')
 router.register('users', user_views.UsersViewSet, 'users')
 
 app_name = 'api'
@@ -34,4 +34,6 @@ urlpatterns = [
   path('signup/', RegisterView.as_view(), name='rest_register'),
   path('account-confirm-email/', VerifyEmailView.as_view(), name='account_email_verification_sent'), # only needed if email verification is mandatory
   path('token/refresh/', user_views.CustomTokenRefreshView.as_view(), name='token_refresh'),
+
+  path('crypto/prices/live/<id>/', api_views.CryptoPricesLiveViewSet.as_view(), name='crypto_prices_live'),
 ]
