@@ -184,3 +184,4 @@ class CryptoPrices(models.Model):
   date = models.DateField()
   price = models.FloatField()
   volume = models.FloatField()
+  market_cap = models.FloatField()
