@@ -171,3 +171,16 @@ class Metric(models.Model):
 
 	def __str__(self):
 		return f'{self.ticker}'
+
+class Crypto(models.Model):
+  id = models.IntegerField(primary_key=True)
+  symbol = models.CharField(max_length=6, unique=True, blank=True, null=True)
+  name = models.CharField(max_length=200, blank=True, null=True)
+  slug = models.SlugField(max_length=200, blank=True, null=True)
+
+class CryptoPrices(models.Model):
+  crypto_id = models.ForeignKey(Crypto, on_delete=models.CASCADE, blank=True, null=True)
+  date = models.DateField(blank=True, null=True)
+  price = models.FloatField(blank=True, null=True)
+  volume = models.FloatField(blank=True, null=True)
+  market_cap = models.FloatField(blank=True, null=True)
