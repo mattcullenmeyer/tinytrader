@@ -65,8 +65,9 @@ class CryptoPricesLiveViewSet(APIView):
   def get(self, request, *args, **kwargs):
     coin_id = kwargs.get('id')
     timeEnd = int(time.time())
-    timeStart = timeEnd - 86400 * 365 * 1
-    url = f'https://api.coinmarketcap.com/data-api/v3/cryptocurrency/historical?id={coin_id}&convertId=2781&timeStart={timeStart}&timeEnd={timeEnd}'
+    timeStart = timeEnd - 86400 * 365 * 2
+    url = f'https://api.coinmarketcap.com/data-api/v3/cryptocurrency/historical?' \
+      f'id={coin_id}&convertId=2781&timeStart={timeStart}&timeEnd={timeEnd}'
     
     r = requests.get(url)
     data = r.json()
@@ -80,7 +81,7 @@ class CryptoPricesLiveViewSet(APIView):
       price = temp['close']
       volume = temp['volume']
       market_data.append({
-        'date': date.strftime('%Y-%m-%d'),
+        'date': date.strftime('%m/%d/%Y'),
         'price': price,
         'volume': volume
       })
@@ -91,7 +92,7 @@ class CryptoPricesLiveViewSet(APIView):
     df['ema5'] = df.price.ewm(span=5, min_periods=5, adjust=False).mean()
     df['ema50'] = df.price.ewm(span=50, min_periods=50, adjust=False).mean()
 
-    result = df.to_json(orient='records')
+    result = df[-365:].to_json(orient='records')
     parsed = json.loads(result)
 
     return Response(parsed)

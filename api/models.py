@@ -1,5 +1,4 @@
 from django.db import models
-import uuid
 
 class Ticker(models.Model):
 	ticker = models.CharField(max_length=6, unique=True)
@@ -175,13 +174,13 @@ class Metric(models.Model):
 
 class Crypto(models.Model):
   id = models.IntegerField(primary_key=True)
-  symbol = models.CharField(max_length=6, unique=True)
-  name = models.CharField(max_length=200)
-  slug = models.SlugField(max_length=200)
+  symbol = models.CharField(max_length=6, unique=True, blank=True, null=True)
+  name = models.CharField(max_length=200, blank=True, null=True)
+  slug = models.SlugField(max_length=200, blank=True, null=True)
 
 class CryptoPrices(models.Model):
   crypto_id = models.ForeignKey(Crypto, on_delete=models.CASCADE, blank=True, null=True)
-  date = models.DateField()
-  price = models.FloatField()
-  volume = models.FloatField()
-  market_cap = models.FloatField()
+  date = models.DateField(blank=True, null=True)
+  price = models.FloatField(blank=True, null=True)
+  volume = models.FloatField(blank=True, null=True)
+  market_cap = models.FloatField(blank=True, null=True)
