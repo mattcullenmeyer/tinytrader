@@ -1,4 +1,4 @@
-from rest_framework import viewsets, permissions
+from rest_framework import viewsets, permissions, filters
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from api import models
@@ -51,7 +51,9 @@ class CryptoViewSet(viewsets.ModelViewSet):
   queryset = models.Crypto.objects.all()
   serializer_class = serializers.CryptoSerializer
   permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-  lookup_field = 'symbol'
+  lookup_field = 'slug'
+  filter_backends = [filters.SearchFilter]
+  search_fields = ['name']
 
 class CryptoPricesHistoricalViewSet(viewsets.ModelViewSet):
   queryset = models.CryptoPrices.objects.all().order_by('-date')
@@ -78,10 +80,12 @@ class CryptoPricesLiveViewSet(APIView):
     for quote in quotes:
       temp = quote['quote']
       date = pd.to_datetime(temp['timestamp'])
+      # date = temp['timestamp']
       price = temp['close']
       volume = temp['volume']
       market_data.append({
-        'date': date.strftime('%m/%d/%Y'),
+        # 'date': date.strftime('%m/%d/%Y'),
+        'date': date,
         'price': price,
         'volume': volume
       })
@@ -92,7 +96,7 @@ class CryptoPricesLiveViewSet(APIView):
     df['ema5'] = df.price.ewm(span=5, min_periods=5, adjust=False).mean()
     df['ema50'] = df.price.ewm(span=50, min_periods=50, adjust=False).mean()
 
-    result = df[-365:].to_json(orient='records')
+    result = df[-182:].to_json(orient='records')
     parsed = json.loads(result)
 
     return Response(parsed)
