@@ -1,3 +1,4 @@
+from django.views.generic.base import TemplateView
 from rest_framework import viewsets, permissions, filters
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -10,6 +11,11 @@ import json
 
 # https://www.django-rest-framework.org/api-guide/viewsets/
 # https://www.django-rest-framework.org/tutorial/4-authentication-and-permissions/
+
+# https://www.django-rest-framework.org/topics/documenting-your-api/
+class OpenApiView(TemplateView):
+  template_name = 'api/documentation.html'
+  extra_context = {'schema_url': 'api:schema_view'}
 
 class TickerViewSet(viewsets.ModelViewSet):
   queryset = models.Ticker.objects.all()

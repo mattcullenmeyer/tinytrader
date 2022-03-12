@@ -49,6 +49,7 @@ INSTALLED_APPS = [
   'dj_rest_auth', # used for user authentication endpoints
   'dj_rest_auth.registration', # used for user registration endpoint
   'rest_framework_simplejwt.token_blacklist', # required for SIMPLE_JWT BLACKLIST_AFTER_ROTATION setting
+  'rest_framework_swagger', # used for OpenAPI documentation
 
   # Local
   'users',
@@ -183,6 +184,9 @@ REST_FRAMEWORK = {
   ),
   'DEFAULT_FILTER_BACKENDS': (
     'django_filters.rest_framework.DjangoFilterBackend',
+  ),
+  'DEFAULT_SCHEMA_CLASS': (
+    'rest_framework.schemas.coreapi.AutoSchema'
   ),
 }
 
