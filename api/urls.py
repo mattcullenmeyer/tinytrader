@@ -1,11 +1,14 @@
 from django.urls import include, path
 from rest_framework import routers
 from rest_framework.authtoken.views import obtain_auth_token
+from rest_framework.schemas import get_schema_view
 from dj_rest_auth.views import LoginView, LogoutView
 from dj_rest_auth.registration.views import VerifyEmailView, ConfirmEmailView, RegisterView
 
 from api import views as api_views
 from users import views as user_views
+
+schema_view = get_schema_view(title='TinyTrader API', description='OpenAPI Schema')
 
 # https://www.django-rest-framework.org/tutorial/quickstart/
 router = routers.DefaultRouter()
@@ -36,4 +39,7 @@ urlpatterns = [
   path('token/refresh/', user_views.CustomTokenRefreshView.as_view(), name='token_refresh'),
 
   path('crypto/prices/live/<id>/', api_views.CryptoPricesLiveViewSet.as_view(), name='crypto_prices_live'),
+
+  path('openapi/', schema_view, name='schema_view'),
+  path('docs/', api_views.OpenApiView.as_view(), name='swagger_ui'),
 ]

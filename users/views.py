@@ -51,6 +51,7 @@ class UsersViewSet(viewsets.ModelViewSet):
 
 class UserDetailView(generics.RetrieveAPIView):
   permission_classes = [permissions.IsAuthenticated]
+  queryset = models.User.objects.all()
   def get(self, request):
     serializer = serializers.UserSerializer(request.user)
     return Response(serializer.data)
