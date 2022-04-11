@@ -4,10 +4,11 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from api import models
 from api import serializers
-import time
+# import time
 import requests
 import pandas as pd
 import json
+from datetime import datetime
 
 # https://www.django-rest-framework.org/api-guide/viewsets/
 # https://www.django-rest-framework.org/tutorial/4-authentication-and-permissions/
@@ -72,37 +73,58 @@ class CryptoPricesLiveViewSet(APIView):
   
   def get(self, request, *args, **kwargs):
     coin_id = kwargs.get('id')
-    timeEnd = int(time.time())
-    timeStart = timeEnd - 86400 * 365 * 2
-    url = f'https://api.coinmarketcap.com/data-api/v3/cryptocurrency/historical?' \
-      f'id={coin_id}&convertId=2781&timeStart={timeStart}&timeEnd={timeEnd}'
+    # timeEnd = int(time.time())
+    # timeStart = timeEnd - 86400 * 90
+    # url = f'https://api.coinmarketcap.com/data-api/v3/cryptocurrency/historical?' \
+    #   f'id={coin_id}&convertId=2781&timeStart={timeStart}&timeEnd={timeEnd}'
+
+    url = f'https://api.coinmarketcap.com/data-api/v3/cryptocurrency/detail/chart?id={coin_id}&range=ALL'
     
     r = requests.get(url)
     data = r.json()
 
-    quotes = data['data']['quotes']
-  
+    # quotes = data['data']['quotes']
+    quotes = data['data']['points']
+
     market_data = []
     for quote in quotes:
-      temp = quote['quote']
-      date = pd.to_datetime(temp['timestamp'])
-      # date = temp['timestamp']
-      price = temp['close']
-      volume = temp['volume']
+      date = datetime.fromtimestamp(int(quote))
+      temp = quotes[quote]['v']
+      # numbers = [n for n in temp[:3] if n != 0]
+      # price = min(numbers)
+      price, volume = temp[:2]
       market_data.append({
-        # 'date': date.strftime('%m/%d/%Y'),
-        'date': date,
+        'unix': quote,
+        'date': date.strftime('%m/%d/%Y'),
+        # 'date': date,
         'price': price,
         'volume': volume
       })
+  
+    # market_data = []
+    # for quote in quotes:
+    #   temp = quote['quote']
+    #   date = pd.to_datetime(temp['timestamp'])
+    #   # date = temp['timestamp']
+    #   price = temp['close']
+    #   volume = temp['volume']
+    #   market_data.append({
+    #     'date': date.strftime('%m/%d/%Y'),
+    #     # 'date': date,
+    #     'price': price,
+    #     'volume': volume
+    #   })
 
-    columns=['date', 'price', 'volume']
+    columns=['unix', 'date', 'price', 'volume']
+    # columns=['date', 'price']
     df = pd.DataFrame(market_data, columns=columns)
+    df.sort_values(by='unix', inplace=True)
 
     df['ema5'] = df.price.ewm(span=5, min_periods=5, adjust=False).mean()
     df['ema50'] = df.price.ewm(span=50, min_periods=50, adjust=False).mean()
 
     result = df[-182:].to_json(orient='records')
+    # result = df.to_json(orient='records')
     parsed = json.loads(result)
 
     return Response(parsed)
