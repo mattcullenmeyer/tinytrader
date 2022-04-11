@@ -178,6 +178,9 @@ class Crypto(models.Model):
   name = models.CharField(max_length=200, blank=True, null=True)
   slug = models.SlugField(max_length=200, blank=True, null=True)
 
+  def __str__(self):
+    return f'{self.symbol}'
+
 class CryptoPrices(models.Model):
   crypto_id = models.ForeignKey(Crypto, on_delete=models.CASCADE, blank=True, null=True)
   date = models.DateField(blank=True, null=True)
