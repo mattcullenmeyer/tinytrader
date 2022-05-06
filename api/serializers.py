@@ -67,3 +67,6 @@ class CryptoPricesSerializer(serializers.ModelSerializer):
   class Meta:
     model = models.CryptoPrices
     fields = '__all__'
+
+class EmailConfirmationSerializer(serializers.Serializer):
+  email_address = serializers.CharField()
