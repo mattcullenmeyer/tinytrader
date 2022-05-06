@@ -3,7 +3,12 @@ from rest_framework import routers
 from rest_framework.authtoken.views import obtain_auth_token
 from rest_framework.schemas import get_schema_view
 from dj_rest_auth.views import LoginView, LogoutView
-from dj_rest_auth.registration.views import VerifyEmailView, ConfirmEmailView, RegisterView
+from dj_rest_auth.registration.views import (
+  VerifyEmailView, 
+  ConfirmEmailView, 
+  RegisterView,
+  ResendEmailVerificationView
+)
 
 from api import views as api_views
 from users import views as user_views
@@ -30,11 +35,13 @@ urlpatterns = [
   path('api-auth/', include('rest_framework.urls', namespace='rest_framework')), # TODO: do we need this??
   path('signup/email/<str:email>/', user_views.SignupEmailView.as_view(), name='signup_email'),
   path('user/detail/', user_views.UserDetailView.as_view(), name='user_detail'),
+  path('email-confirmation/<str:key>/', user_views.email_confirmation, name='email_confirmation'), # returns email associated with key
 
   path('login/', LoginView.as_view(), name='rest_login'),
   path('logout/', LogoutView.as_view(), name='rest_logout'),
   path('account-confirm-email/<str:key>/', ConfirmEmailView.as_view()), # needs to be defined before registration path
   path('signup/', RegisterView.as_view(), name='rest_register'),
+  path('resend-email/', ResendEmailVerificationView.as_view(), name='rest_resend_email'),
   path('account-confirm-email/', VerifyEmailView.as_view(), name='account_email_verification_sent'), # only needed if email verification is mandatory
   path('token/refresh/', user_views.CustomTokenRefreshView.as_view(), name='token_refresh'),
 

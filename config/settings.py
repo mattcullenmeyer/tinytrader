@@ -191,6 +191,9 @@ REST_FRAMEWORK = {
 }
 
 # django-allauth config
+# https://django-allauth.readthedocs.io/en/latest/advanced.html#custom-redirects
+ACCOUNT_ADAPTER = 'users.adapter.MyAccountAdapter'
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 3
 LOGIN_REDIRECT_URL = 'pages:home'
 ACCOUNT_LOGOUT_REDIRECT = 'pages:home' 
 SITE_ID = 1
@@ -198,7 +201,7 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 )
-#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # use consol instead of smtp until server is configured
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # use consol instead of smtp until server is configured
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 ACCOUNT_SESSION_REMEMBER = True # remember username and password of users
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False # only have to enter password once on signup
@@ -209,6 +212,9 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True 
 ACCOUNT_EMAIL_SUBJECT_PREFIX = ''
 ACCOUNT_LOGIN_ON_PASSWORD_RESET = True
+# disable HMAC to store email confirmation keys db, 
+# allowing frontend to associate key with correct email addresse
+ACCOUNT_EMAIL_CONFIRMATION_HMAC = False 
 
 # Twilio SendGrid
 EMAIL_HOST = 'smtp.sendgrid.net'

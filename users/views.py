@@ -6,11 +6,13 @@ from allauth.account.adapter import get_adapter
 from django.contrib import messages
 from django.shortcuts import redirect
 from rest_framework import viewsets, generics
+from api.serializers import EmailConfirmationSerializer
 from users import serializers
-# from django.contrib.auth.models import User
 from users import models
 from rest_framework import permissions
 from rest_framework_simplejwt.views import TokenViewBase
+from allauth.account.models import EmailConfirmation
+from rest_framework.decorators import api_view, permission_classes
 
 
 # https://stackoverflow.com/questions/54467321/how-to-tell-if-users-email-address-has-been-verified-using-django-allauth-res
@@ -43,6 +45,19 @@ def resend_verfication(request):
     except EmailAddress.DoesNotExist:
         pass
     return redirect(next)
+
+@api_view(['GET'])
+@permission_classes([permissions.AllowAny])
+def email_confirmation(request, key):
+  if request.method == 'GET':
+    # key = request.data['key'] # use for post request if in request body
+    email_confirmation = EmailConfirmation.objects.get(key=key)
+    key_expired = email_confirmation.key_expired()
+    serializer = EmailConfirmationSerializer(email_confirmation)
+    return Response({
+      "email_address": serializer.data['email_address'],
+      "key_expired": key_expired
+    })
 
 class UsersViewSet(viewsets.ModelViewSet):
   queryset = models.User.objects.all()
