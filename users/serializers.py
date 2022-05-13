@@ -14,6 +14,11 @@ class SignupEmailSerializer(serializers.ModelSerializer):
     model = models.User
     fields = ('email',)
 
+class SignupUsernameSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = models.User
+    fields = ('username',)
+
 # https://github.com/jazzband/djangorestframework-simplejwt/blob/master/rest_framework_simplejwt/serializers.py
 class CustomTokenRefreshSerializer(TokenRefreshSerializer):
   refresh = serializers.CharField()

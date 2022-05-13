@@ -77,5 +77,11 @@ class SignupEmailView(generics.RetrieveAPIView):
   queryset = models.User.objects.all()
   lookup_field = 'email'
 
+class SignupUsernameView(generics.RetrieveAPIView):
+  serializer_class = serializers.SignupUsernameSerializer
+  permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+  queryset = models.User.objects.all()
+  lookup_field = 'username'
+
 class CustomTokenRefreshView(TokenViewBase):
   serializer_class = serializers.CustomTokenRefreshSerializer
