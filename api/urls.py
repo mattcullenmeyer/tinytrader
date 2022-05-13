@@ -33,7 +33,8 @@ urlpatterns = [
   path('', include(router.urls)),
   path('api-token-auth/', obtain_auth_token, name='api_token_auth'), # TODO: do we still need this??
   path('api-auth/', include('rest_framework.urls', namespace='rest_framework')), # TODO: do we need this??
-  path('signup/email/<str:email>/', user_views.SignupEmailView.as_view(), name='signup_email'),
+  path('signup/email/<str:email>/', user_views.SignupEmailView.as_view(), name='signup_email'), # used to check if email is already in use
+  path('signup/username/<str:username>/', user_views.SignupUsernameView.as_view(), name='signup_username'), # used to check if username is already in use
   path('user/detail/', user_views.UserDetailView.as_view(), name='user_detail'),
   path('email-confirmation/<str:key>/', user_views.email_confirmation, name='email_confirmation'), # returns email associated with key
 
