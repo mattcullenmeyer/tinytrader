@@ -153,7 +153,7 @@ STATIC_URL = '/static/'
 # this is used to make collectstatic possible so it knows where files live
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')] 
 # STATIC_ROOT is folder where static files will be stored after collectstatic
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # STATICFILES_FINDERS tells Django how to look for static file directories
 # this is implictly set and therefore optional, but better to make explicit
 STATICFILES_FINDERS = [
@@ -164,7 +164,7 @@ STATICFILES_FINDERS = [
 # MEDIA_URL is the absolute file to user-uploaded files
 MEDIA_URL = '/media/'
 # MEDIA_ROOT is the URL we can use in template files
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
 
 AUTH_USER_MODEL = 'users.User'
 
