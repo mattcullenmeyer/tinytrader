@@ -6,6 +6,9 @@ docker-up:
 docker-down:
 	docker compose down
 
+docker-makemigrations:
+	docker compose exec web python manage.py makemigrations
+
 docker-migrate:
 	docker compose exec web python manage.py migrate --noinput
 
@@ -22,6 +25,9 @@ docker-up-prod:
 
 docker-down-prod:
 	docker compose -f docker-compose.prod.yml down
+
+docker-makemigrations-prod:
+	docker compose -f docker-compose.prod.yml exec web python manage.py makemigrations
 
 docker-migrate-prod:
 	docker compose -f docker-compose.prod.yml exec web python manage.py migrate --noinput
