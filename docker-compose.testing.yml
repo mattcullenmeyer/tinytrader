@@ -22,16 +22,23 @@ services:
     env_file:
       - ./.env.db
   nginx:
-    image: nginx:latest
+    image: nginx
     volumes:
-      - ./nginx/testing/:/etc/nginx/conf.d
       - static_volume:/code/staticfiles
       - media_volume:/code/mediafiles
+      - ./nginx/testing/:/etc/nginx/conf.d/:ro
+      - ./certbot/www:/var/www/certbot/:ro
+      - ./certbot/conf:/etc/letsencrypt/:ro
     ports:
       - 80:80
     restart: always
     depends_on:
       - web
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - ./certbot/www:/var/www/certbot/:rw
+      - ./certbot/conf:/etc/letsencrypt/:rw
 
 volumes:
   postgres_data:

@@ -51,10 +51,10 @@ docker-createsuperuser-prod:
 	docker compose -f docker-compose.prod.yml exec web python manage.py createsuperuser
 
 docker-certbot-staging:
-	docker compose -f docker-compose.prod.yml run --rm certbot certonly --webroot --webroot-path /var/www/certbot/ --email mattcullenmeyer@gmail.com --staging --agree-tos -d staging.tinytrader.io 
+	docker compose -f docker-compose.prod.yml run --rm certbot certonly --webroot --webroot-path /var/www/certbot --email mattcullenmeyer@gmail.com --staging --agree-tos -d staging.tinytrader.io
 
 docker-certbot:
-	docker compose -f docker-compose.prod.yml run --rm certbot certonly --webroot --webroot-path /var/www/certbot/ --email mattcullenmeyer@gmail.com --agree-tos -d staging.tinytrader.io 
+	docker compose -f docker-compose.prod.yml run --rm certbot certonly --webroot --webroot-path /var/www/certbot --email mattcullenmeyer@gmail.com --agree-tos -d staging.tinytrader.io 
 
 # testing commands
 
@@ -81,3 +81,6 @@ docker-collectstatic-testing:
 
 docker-createsuperuser-testing:
 	docker compose -f docker-compose.testing.yml exec web python manage.py createsuperuser
+
+docker-shell-testing:
+	docker compose -f docker-compose.testing.yml exec -it web sh
