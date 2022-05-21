@@ -1,4 +1,10 @@
-# local commands
+# dev commands
+
+docker-all: \
+	docker-up \
+	docker-makemigrations \
+	docker-migrate \
+	docker-collectstatic
 
 docker-up:
 	docker compose up -d --build
@@ -20,6 +26,12 @@ docker-createsuperuser:
 
 # production commands
 
+docker-prod-all: \
+	docker-up-prod \
+	docker-makemigrations-prod \
+	docker-migrate-prod \
+	docker-collectstatic-prod
+
 docker-up-prod:
 	docker compose -f docker-compose.prod.yml up -d --build
 
@@ -37,3 +49,29 @@ docker-collectstatic-prod:
 
 docker-createsuperuser-prod:
 	docker compose -f docker-compose.prod.yml exec web python manage.py createsuperuser
+
+# testing commands
+
+docker-testing-all: \
+	docker-up-testing \
+	docker-makemigrations-testing \
+	docker-migrate-testing \
+	docker-collectstatic-testing
+
+docker-up-testing:
+	docker compose -f docker-compose.testing.yml up -d --build
+
+docker-down-testing:
+	docker compose -f docker-compose.testing.yml down
+
+docker-makemigrations-testing:
+	docker compose -f docker-compose.testing.yml exec web python manage.py makemigrations
+
+docker-migrate-testing:
+	docker compose -f docker-compose.testing.yml exec web python manage.py migrate --noinput
+
+docker-collectstatic-testing:
+	docker compose -f docker-compose.testing.yml exec web python manage.py collectstatic --no-input --clear
+
+docker-createsuperuser-testing:
+	docker compose -f docker-compose.testing.yml exec web python manage.py createsuperuser
