@@ -24,11 +24,11 @@ services:
   nginx:
     image: nginx:latest
     volumes:
-      - ./nginx/prod/:/etc/nginx/conf.d
       - static_volume:/code/staticfiles
       - media_volume:/code/mediafiles
-      - ./certbot/conf:/etc/letsencrypt
-      - ./certbot/www:/var/www/certbot
+      - ./nginx/prod/:/etc/nginx/conf.d/:ro
+      - /var/lib/letsencrypt:/var/lib/letsencrypt/:ro
+      - /etc/letsencrypt:/etc/letsencrypt/:ro
     ports:
       - 80:80
       - 443:443
@@ -36,10 +36,10 @@ services:
     depends_on:
       - web
   certbot:
-    image: certbot/certbot
+    image: certbot/certbot:latest
     volumes:
-      - ./certbot/conf:/etc/letsencrypt
-      - ./certbot/www:/var/www/certbot
+      - /var/lib/letsencrypt:/var/lib/letsencrypt/:rw
+      - /etc/letsencrypt:/etc/letsencrypt/:rw
 
 volumes:
   postgres_data:
