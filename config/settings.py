@@ -6,7 +6,6 @@ import logging.config
 
 load_dotenv()
 
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -226,7 +225,6 @@ EMAIL_HOST_USER = 'apikey'
 EMAIL_HOST_PASSWORD = os.getenv("SENDGRID_API_KEY")
 
 DEFAULT_FROM_EMAIL = 'matt@tinytrader.io'
-
 
 # Logging Configuration
 

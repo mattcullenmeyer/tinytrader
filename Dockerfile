@@ -1,3 +1,4 @@
+# pull official base image
 FROM python:3.10.4
 
 # set working directory
@@ -6,6 +7,9 @@ WORKDIR /code
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
+
+# install build dependencies
+RUN apt-get update
 
 # install dependencies
 RUN pip install --upgrade pip
