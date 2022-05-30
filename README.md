@@ -36,6 +36,11 @@ $ pip3 install -r requirements.txt
 $ python manage.py migrate
 ```
 
+### Docker
+
+`$ make docker-dev-all`  
+Visit http://localhost:8000/
+
 ### Run Server
 
 With the virtual environment still active, run the following command to run the server:  
