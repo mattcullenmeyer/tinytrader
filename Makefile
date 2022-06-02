@@ -1,10 +1,9 @@
 # dev commands
 
-docker-dev-all: \
+docker-all-dev: \
 	docker-up-dev \
 	docker-makemigrations-dev \
-	docker-migrate-dev \
-	docker-collectstatic-dev
+	docker-migrate-dev
 
 docker-up-dev:
 	docker compose -f docker-compose.dev.yml up -d --build
@@ -12,48 +11,21 @@ docker-up-dev:
 docker-down-dev:
 	docker compose -f docker-compose.dev.yml down
 
+docker-logs-dev:
+	docker compose -f docker-compose.dev.yml logs
+
 docker-makemigrations-dev:
 	docker compose -f docker-compose.dev.yml exec web python manage.py makemigrations
 
 docker-migrate-dev:
 	docker compose -f docker-compose.dev.yml exec web python manage.py migrate --noinput
 
-docker-collectstatic-dev:
-	docker compose -f docker-compose.dev.yml exec web python manage.py collectstatic --no-input --clear
-
 docker-createsuperuser-dev:
 	docker compose -f docker-compose.dev.yml exec web python manage.py createsuperuser
 
-# production commands
+# staging commands
 
-docker-prod-all: \
-	docker-up-prod \
-	docker-makemigrations-prod \
-	docker-migrate-prod \
-	docker-collectstatic-prod
-
-docker-up-prod:
-	docker compose -f docker-compose.prod.yml up -d --build
-
-docker-down-prod:
-	docker compose -f docker-compose.prod.yml down
-
-docker-makemigrations-prod:
-	docker compose -f docker-compose.prod.yml exec web python manage.py makemigrations
-
-docker-migrate-prod:
-	docker compose -f docker-compose.prod.yml exec web python manage.py migrate --noinput
-
-docker-collectstatic-prod:
-	docker compose -f docker-compose.prod.yml exec web python manage.py collectstatic --no-input --clear
-
-docker-createsuperuser-prod:
-	docker compose -f docker-compose.prod.yml exec web python manage.py createsuperuser
-
-
-# testing commands
-
-docker-staging-all: \
+docker-all-staging: \
 	docker-up-staging \
 	docker-makemigrations-staging \
 	docker-migrate-staging \
@@ -64,6 +36,9 @@ docker-up-staging:
 
 docker-down-staging:
 	docker compose -f docker-compose.staging.yml down
+
+docker-logs-staging:
+	docker compose -f docker-compose.staging.yml logs
 
 docker-makemigrations-staging:
 	docker compose -f docker-compose.staging.yml exec web python manage.py makemigrations
