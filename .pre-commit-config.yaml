@@ -1,0 +1,17 @@
+default_language_version:
+  python: python3.8.10
+repos:
+  - repo: "https://github.com/pre-commit/pre-commit-hooks"
+    rev: v4.2.0
+    hooks:
+      - id: trailing-whitespace # trims trailing whitespace
+      - id: check-ast # checks whether files parse as valid python
+      - id: check-yaml # checks yaml files for parseable syntax
+      - id: check-merge-conflict # checks for files that contain merge conflict strings
+      - id: check-added-large-files # prevents giant files from being committed
+      - id: requirements-txt-fixer # sorts entries in requirements.txt
+      - id: check-case-conflict #  checks for files that would conflict in case-insensitive filesystems
+      - id: check-executables-have-shebangs # ensures that (non-binary) executables have a shebang
+      - id: end-of-file-fixer # ensures that a file is either empty, or ends with one newline
+      - id: name-tests-test # verifies that test files are named correctly
+        args: ["--django"] # test files should be named test_*.py rather than *_test.py
