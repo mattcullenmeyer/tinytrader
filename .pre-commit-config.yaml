@@ -1,5 +1,5 @@
 default_language_version:
-  python: python3.8.10
+  python: python3.8.10 # check version with python3 -V
 repos:
   - repo: "https://github.com/pre-commit/pre-commit-hooks"
     rev: v4.2.0
@@ -20,3 +20,15 @@ repos:
     hooks:
       - id: bandit
         args: ["-iii", "-ll"] # only report issues with high confidence and of medium or above severity
+  - repo: https://gitlab.com/pycqa/flake8
+    rev: 3.9.2
+    hooks:
+      - id: flake8
+        # add additional flake8 extensions
+        # https://github.com/DmytroLitvinov/awesome-flake8-extensions
+        additional_dependencies: [
+            "flake8-bugbear", # finds likely bugs and design problems in your program
+            "flake8-comprehensions", # helps you write better list/set/dict comprehensions
+            "flake8-print", # report print statement
+            "flake8-simplify", # helps you to simplify code
+          ]
