@@ -1,0 +1,60 @@
+default_language_version:
+  python: python3.8.10 # check version with python3 -V
+repos:
+  - repo: "https://github.com/pre-commit/pre-commit-hooks"
+    rev: v4.3.0
+    hooks:
+      - id: trailing-whitespace # trims trailing whitespace
+      - id: check-ast # checks whether files parse as valid python
+      - id: check-yaml # checks yaml files for parseable syntax
+      - id: check-merge-conflict # checks for files that contain merge conflict strings
+      - id: check-added-large-files # prevents giant files from being committed
+      - id: requirements-txt-fixer # sorts entries in requirements.txt
+      - id: check-case-conflict #  checks for files that would conflict in case-insensitive filesystems
+      - id: check-executables-have-shebangs # ensures that (non-binary) executables have a shebang
+      - id: end-of-file-fixer # ensures that a file is either empty, or ends with one newline
+      - id: name-tests-test # verifies that test files are named correctly
+        args: ["--django"] # test files should be named test_*.py rather than *_test.py
+  - repo: https://github.com/pycqa/bandit
+    rev: 1.7.4
+    hooks:
+      - id: bandit
+        args: ["-iii", "-ll"] # only report issues with high confidence and of medium or above severity
+  - repo: https://gitlab.com/pycqa/flake8
+    rev: 3.9.2
+    hooks:
+      - id: flake8
+        # add additional flake8 extensions
+        # https://github.com/DmytroLitvinov/awesome-flake8-extensions
+        additional_dependencies: [
+            "flake8-bugbear", # finds likely bugs and design problems in your program
+            "flake8-comprehensions", # helps you write better list/set/dict comprehensions
+            "flake8-print", # report print statement
+            "flake8-simplify", # helps you to simplify code
+          ]
+  - repo: https://github.com/pycqa/pylint
+    rev: "v2.14.1"
+    hooks:
+      - id: pylint
+        exclude: "[a-zA-Z]*/(migrations)/(.)*"
+        args:
+          [
+            "--load-plugins=pylint_django",
+            "--django-settings-module=config.settings",
+          ]
+        additional_dependencies: [pylint_django]
+  - repo: https://github.com/psf/black
+    rev: 22.3.0
+    hooks:
+      - id: black
+  # seed-isort-config auto populates list of third party packages
+  # for isort in config.toml file
+  # seed-isort-config must come before isort here
+  # - repo: https://github.com/asottile/seed-isort-config
+  #   rev: v2.2.0
+  #   hooks:
+  #     - id: seed-isort-config
+  - repo: https://github.com/pycqa/isort
+    rev: 5.10.1
+    hooks:
+      - id: isort
