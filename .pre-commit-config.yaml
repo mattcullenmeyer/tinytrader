@@ -37,12 +37,12 @@ repos:
     hooks:
       - id: pylint
         exclude: "[a-zA-Z]*/(migrations)/(.)*"
-        args:
-          [
-            "--load-plugins=pylint_django",
-            "--django-settings-module=config.settings",
-          ]
-        additional_dependencies: [pylint_django]
+        # args:
+        #   [
+        #     "--load-plugins=pylint_django",
+        #     "--django-settings-module=config.settings",
+        #   ]
+        # additional_dependencies: [django, pylint_django]
   - repo: https://github.com/psf/black
     rev: 22.3.0
     hooks:
