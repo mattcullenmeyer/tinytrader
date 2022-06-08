@@ -2,7 +2,7 @@ default_language_version:
   python: python3.8.10 # check version with python3 -V
 repos:
   - repo: "https://github.com/pre-commit/pre-commit-hooks"
-    rev: v4.2.0
+    rev: v4.3.0
     hooks:
       - id: trailing-whitespace # trims trailing whitespace
       - id: check-ast # checks whether files parse as valid python
@@ -47,3 +47,14 @@ repos:
     rev: 22.3.0
     hooks:
       - id: black
+  # seed-isort-config auto populates list of third party packages
+  # for isort in config.toml file
+  # seed-isort-config must come before isort here
+  # - repo: https://github.com/asottile/seed-isort-config
+  #   rev: v2.2.0
+  #   hooks:
+  #     - id: seed-isort-config
+  - repo: https://github.com/pycqa/isort
+    rev: 5.10.1
+    hooks:
+      - id: isort

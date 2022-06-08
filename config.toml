@@ -18,3 +18,14 @@ good-names = "_,i,e,setUp,tearDown,maxDiff"
 [tool.black]
 line-length = 88
 include = '\.pyi?$'
+
+# [tool.isort]
+# # profile, multi_line_output & line_length are
+# # to make compatible with black
+# profile = "black"
+# multi_line_output = 3
+# line_length = 88
+# default_section = "THIRDPARTY" # group unrecognized imports in the third party category
+# known_first_party = ["users", "pages", "blog", "api"] # project's local apps
+# # known_third_party is auto populated with seed-isort-config
+# known_third_party = []
